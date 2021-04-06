@@ -22,18 +22,18 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.use(cookieParser());
-  app.use(
-    session({
-      resave: false,
-      saveUninitialized: false,
-      secret: process.env.COOKIE_SECRET,
-      cookie: {
-        httpOnly: true,
-      },
-    }),
-  );
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(
+  //   session({
+  //     resave: false,
+  //     saveUninitialized: false,
+  //     // secret: process.env.COOKIE_SECRET,
+  //     cookie: {
+  //       httpOnly: true,
+  //     },
+  //   }),
+  // );
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   await app.listen(3000);
 
