@@ -7,6 +7,6 @@ export class CreatePostDto{
     slug:string;
     
     @IsNotEmpty()    
-    desctiption:string;
+    description:string;
 
 }

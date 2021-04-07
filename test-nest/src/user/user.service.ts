@@ -27,10 +27,10 @@ export class UserService {
   }
 
   create(userData: CreateUserDto) {
-    this.users.push({
-      id: this.users.length + 1,
-      ...userData
-    });
+    // this.users.push({
+    //   id: this.users.length + 1,
+    //   ...userData
+    // });
   }
 
   update(id: number, updateData: UpdateUserDto) {

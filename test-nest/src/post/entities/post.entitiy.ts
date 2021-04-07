@@ -1,19 +1,23 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+// import { User } from "src/user/entities/users.entity";
+// import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("posts")
-export class Posts{
+// @Entity("posts")
+// export class Posts{
     
-    @PrimaryGeneratedColumn()
-    id:number;
+//     @PrimaryGeneratedColumn()
+//     id:number;
 
-    @Column({type:"varchar" , length:255})
-    slug:string;
+//     @Column({type:"varchar" , length:255})
+//     slug:string;
 
-    @Column({type:"varchar" , length:255})
-    desctiption:string;
-}
+//     @Column({type:"varchar" , length:255})
+//     description:string;
 
-export interface UserInfo{
-    slug:string;
-    description:string;
-}
+//     @ManyToOne(type=>User, user => user.posts)
+//     user:User
+// }
+
+// export interface UserInfo{
+//     slug:string;
+//     description:string;
+// }
