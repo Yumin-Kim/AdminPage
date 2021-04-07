@@ -23,6 +23,9 @@
     * 시작 기간 : 2021 . 02 .17 ~
     * 재시작 기간 : 2021 .04 .05
     * 마감 예정 기간 : 2021 . 06 . 05 생각중!!
-    
 
-### https://medium.com/crocusenergy/nestjs-typeorm-%EA%B8%B0%EB%B3%B8-crud-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-69b9640dc826 관련 포스팅은 NestJS , TypeORM관련 포스팅이며 기초 잘설명되어 있다.
+### 개발에 있어 필요한 자료
+* <a href="https://medium.com/crocusenergy/nestjs-typeorm-%EA%B8%B0%EB%B3%B8-crud-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-69b9640dc826">NestJS , TypeORM관련 포스팅</a>이며 기초 잘설명되어 있다.
+* <a href="https://stackoverflow.com/questions/48180282/how-to-populate-a-heroku-postgresql-database-with-a-sql-file">Heroku에 임의의 SQL파일을 집어 넣을수 있는 stackoverflow 자료</a>
+---
+
