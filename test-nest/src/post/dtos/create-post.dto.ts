@@ -1,10 +1,12 @@
+import { IsEmail, IsNotEmpty } from "class-validator";
 import { PostCategory } from "../enums";
+
 export class CreatePostDto{
-    title:string;
+
+    @IsNotEmpty()    
     slug:string;
-    excerpt:string;
-    content:string;
-    category:PostCategory;
-    tags:string[];
-    status:boolean;
+    
+    @IsNotEmpty()    
+    desctiption:string;
+
 }

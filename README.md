@@ -24,3 +24,5 @@
     * 재시작 기간 : 2021 .04 .05
     * 마감 예정 기간 : 2021 . 06 . 05 생각중!!
     
+
+### https://medium.com/crocusenergy/nestjs-typeorm-%EA%B8%B0%EB%B3%B8-crud-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-69b9640dc826 관련 포스팅은 NestJS , TypeORM관련 포스팅이며 기초 잘설명되어 있다.

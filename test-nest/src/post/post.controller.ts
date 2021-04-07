@@ -1,39 +1,43 @@
-import { Body, Controller, Delete, Get, Param,Post, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { title } from 'process';
+import { Repository } from 'typeorm';
 import { CreatePostDto } from './dtos/create-post.dto';
+import { Posts } from './entities/post.entitiy';
 import { PostService } from './post.service';
-
 @Controller('post')
 export class PostController {
-
     constructor(
-        // @InjectRepository(Post)
-        private readonly postService:PostService
-    ){}
-
-    @Get()
-    async getMany(){
-        // const data = await this.postRepository.getMany()
-        return await this.postService.getmany()
-    }
-
-    @Get(":id")
-    getOne(@Param("id",ParseIntPipe) id : number){
-        return this.postService.editOne(id)
-    }
-
-    @Post()
-    createOne(
-        @Body() dto:CreatePostDto
-    ){
-        console.log("POST/post");
+        private postService:PostService
         
-        console.log(dto);
+    ){
+        this.postService = postService;
+    }
+    @Get()
+    async findAll():Promise<Posts[]>{
+        return await this.postService.findAll()
     }
 
-    @Delete(":id")
-    deleteOne(@Param("id") id:number){
-        return this.postService.deleteOne(id);
+    @Post("")
+    async savePost(@Body() post : CreatePostDto) : Promise<string>{
+        await this.postService.savePost(post)
+        return Object.assign({
+            data:{...post},
+            statusCode:201,
+            statusMSG:"save successfly"
+        })
     }
+
+    // @Post()
+    // createOne(
+    //     @Body() dto:CreatePostDto
+    // ){
+    //     console.log("POST/post");
+        
+    //     console.log(dto);
+    // }
+
+    // @Delete(":id")
+    // deleteOne(@Param("id") id:number){
+    //     return this.postService.deleteOne(id);
+    // }
 }
