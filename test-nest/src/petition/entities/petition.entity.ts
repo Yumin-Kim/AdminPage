@@ -8,8 +8,8 @@ export class Petitions{
     @PrimaryGeneratedColumn()
     id:number
     
-    @Column({type:"int"})
-    title:number
+    @Column({type:"varchar",length:30})
+    title:string
 
     @Column({type:"text"})
     description:string
