@@ -8,7 +8,7 @@ export class Petitions{
     @PrimaryGeneratedColumn()
     id:number
     
-    @Column({type:"varchar",length:30})
+    @Column({type:"varchar",length:255})
     title:string
 
     @Column({type:"text"})

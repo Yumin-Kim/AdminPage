@@ -6,7 +6,7 @@ export class Images{
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column({type:"int"})
+    @Column({type:"varchar" , length:255})
     name:number
 
     @Column({type:"int"})
@@ -25,8 +25,8 @@ export class OutterImages{
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column({type:"int"})
-    name:number
+    @Column({type:"varchar", length:255})
+    name:string
 
     @Column({type:"int"})
     imageCount:number

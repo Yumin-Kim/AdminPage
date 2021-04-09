@@ -1,41 +1,27 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 import { User } from "./entities/users.entity";
 
 @Injectable()
 export class UserService {
-  private users: User[] = [];
+  constructor(
+    @InjectRepository(User)
+    private userRepositort : Repository<User>
+  ){}
 
-  getAll(): User[] {
-    return this.users;
+  getAll(): Promise< User[] >{
+    return this.userRepositort.find({
+      select:["birth"],
+      // join:{leftJoinAndSelect:{
+      //   group:""
+      // }}, 
+      relations:["test.groups"],
+      skip:0,take:20
+    })
   }
 
-  getOne(id: number): User {
-    const user = this.users.find(user => user.id === Number(id));
-    if (!user) {
-      // 클라이언트는 error.message에 user id ${id} not found이 값이 들어갑니다. status-code는 nest가 정해준 값으로 들어갑니다
-      throw new NotFoundException(`user id ${id} not found`);
-    }
-    return user;
-  }
 
-  deleteOne(id: number): boolean {
-    this.getOne(id);
-    this.users = this.users.filter(user => user.id !== Number(id));
-    return true;
-  }
-
-  create(userData: CreateUserDto) {
-    // this.users.push({
-    //   id: this.users.length + 1,
-    //   ...userData
-    // });
-  }
-
-  update(id: number, updateData: UpdateUserDto) {
-    const user = this.getOne(id);
-    this.deleteOne(id);
-    this.users.push({ ...user, ...updateData });
-  }
 }

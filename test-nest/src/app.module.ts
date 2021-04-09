@@ -38,6 +38,6 @@ import { VotingService } from './voting/voting.service';
     synchronize:true
   }), AppModule,UserModule,AdminModule,VotingModule,PetitionModule,FacilityModule,UsercarModule,PricingModule],
   controllers: [AppController],
-  providers: [AppService, PetitionService, PricingService,AdminService,FacilityService,UserService,UsercarService,VotingService],
+  providers: [AppService],
 })
 export class AppModule {}
