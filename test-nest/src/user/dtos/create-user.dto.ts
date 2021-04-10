@@ -1,14 +1,13 @@
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateUserDto{
+export class CreateUserDto {
+  @IsString()
+  readonly name: string;
 
-    @IsString()
-    readonly name : string;
+  @IsNumber()
+  readonly age: number;
 
-    @IsNumber()
-    readonly age:number;
-
-    @IsOptional()
-    @IsString({each : true})
-    readonly address:string;
+  @IsOptional()
+  @IsString({ each: true })
+  readonly address: string;
 }

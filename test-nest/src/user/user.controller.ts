@@ -10,11 +10,13 @@ import {
 } from '@nestjs/common';
 import {
   IBasicQuery,
+  IFilterFullTable,
   IFilterHumanQuery,
   IFilterRoomQuert,
   MergeHumanQueryString,
   MergeRoomQueryString,
 } from './dtos/querystring';
+import { UpdateUserDto } from './dtos/update-user.dto';
 import { Group, GroupByGroups, User } from './entities/users.entity';
 import { UserService } from './user.service';
 
@@ -77,10 +79,52 @@ export class UserController {
       limit,
     };
 
-    return await this.userService.getFilterHumanAndTable(queryString,sqlCount,detail)
-    
+    return await this.userService.getFilterHumanAndTable(
+      queryString,
+      sqlCount,
+      detail,
+    );
   }
 
   @Get('/filter/info/human/group/groupbygroup')
-  async getFilterFull() {}
+  async getFilterFull(
+    @Query('offset')
+    offset: number,
+    @Query('limit')
+    limit: number,
+    @Query()
+    queryString: IFilterFullTable,
+  ) {
+    delete queryString.limit;
+    delete queryString.offset;
+    let sqlCount: IBasicQuery = {
+      offset,
+      limit,
+    };
+    return await this.userService.getFilterFull(queryString, sqlCount);
+  }
+
+  @Patch('/changed/:id')
+  async updateUserInfo(
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    return await this.userService.updateUserInfo(id, updateUserDto);
+  }
+
+  @Delete('/deleted')
+  async deleteUserInfo(
+    @Query('id') id: number,
+    @Query('offset') offset: number,
+  ) {
+    return await this.userService.deleteUserInfo({ id, offset });
+  }
+
+  @Get('/outter')
+  async getOutterUser(
+    @Query('offset') offset: number,
+    @Query('limit') limit: number,
+  ) {
+    return await this.userService.getOutterUser({ offset, limit });
+  }
 }

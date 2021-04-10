@@ -1,45 +1,60 @@
-import { Admins } from "src/admin/entities/admin.entity"
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { OutterImages } from "./image.entity"
-import { AccessMembers, Group, GroupByGroups, User } from "./users.entity"
+import { Admins } from 'src/admin/entities/admin.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { OutterImages } from './image.entity';
+import { AccessMembers, Group, GroupByGroups, User } from './users.entity';
 
-@Entity("outters")
-export class OutterUsers{
-
+@Entity('outters')
+export class OutterUsers {
   @PrimaryGeneratedColumn()
-  id:number
+  id: number;
 
-  @Column({type:"varchar" , length:50})
-  name:string
+  @Column({ type: 'varchar', length: 50 })
+  name: string;
 
-  @Column({type:"text"})
-  description:string
+  @Column({ type: 'text' })
+  description: string;
 
-  @Column({type:"datetime"})
-  createdAt:Date
+  @Column({ type: 'datetime' })
+  createdAt: Date;
 
-  @Column({type:"datetime"})
-  updatedAt:Date
+  @Column({ type: 'datetime' })
+  updatedAt: Date;
 
-  @Column({type:"varchar" , length:50})
-  phoneNumber:string
+  @Column({ type: 'varchar', length: 50 })
+  phoneNumber: string;
 
-  @ManyToOne(type=>User , user=>user.outterusers )
-  user:User
-  
-  @ManyToOne(type=>Group , group=>group.outterusers )
-  group:Group
+  @ManyToOne((type) => User, (user) => user.outterusers)
+  user: User;
 
-  @ManyToOne(type=>GroupByGroups , groupbygroup=>groupbygroup.outterusers )
-  groupbygroup:GroupByGroups
+  @ManyToOne((type) => Group, (group) => group.outterusers)
+  group: Group;
 
-  @OneToMany(type=>AccessMembers , accessmembers=>accessmembers.outterusers )
-  accessmembers:AccessMembers[]
+  @ManyToOne(
+    (type) => GroupByGroups,
+    (groupbygroup) => groupbygroup.outterusers,
+  )
+  groupbygroup: GroupByGroups;
 
-  @ManyToMany(type=>OutterImages)
+  // @ManyToOne((type) => Admins, (admin) => admin.outterusers)
+  // admin: Admins;
+
+  @OneToMany(
+    (type) => AccessMembers,
+    (accessmembers) => accessmembers.outterusers,
+  )
+  accessmembers: AccessMembers[];
+
+  @ManyToMany((type) => OutterImages)
   @JoinTable()
-  m_outterImages:OutterImages
+  m_outterImages: OutterImages;
 
   // admin_id:number
-  
 }

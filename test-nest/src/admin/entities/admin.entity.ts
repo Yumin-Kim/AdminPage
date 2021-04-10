@@ -1,71 +1,86 @@
-import { OutterUsers } from "src/user/entities/outter.entity"
-import { AccessMembers, Group } from "src/user/entities/users.entity"
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { OutterUsers } from 'src/user/entities/outter.entity';
+import { AccessMembers, Group } from 'src/user/entities/users.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity("admins")
-export class Admins{
+@Entity('admins')
+export class Admins {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id:number
+  @Column({ type: 'varchar', length: 50 })
+  name: string;
 
-    @Column({type:"varchar",length:50})
-    name:string
-    
-    @Column({type:"varchar",length:50})
-    password:string
-    
-    @Column({type:"varchar",length:100})
-    email:string
-    
-    @ManyToOne(type=>Group , group=>group.admins)
-    group:Group
+  @Column({ type: 'varchar', length: 50 })
+  password: string;
 
-    @OneToMany(type=>Admindashboards , admindashboard=>admindashboard.admin)
-    admindashboard:Admindashboards[]
+  @Column({ type: 'varchar', length: 100 })
+  email: string;
 
-    @OneToMany(type=>AccessMembers , accessmembers=>accessmembers.admins)
-    accessmembers:AccessMembers[]
+  @ManyToOne((type) => Group, (group) => group.admins)
+  group: Group;
 
-    @ManyToMany(type=>Days)
-    @JoinTable()
-    M_days:Days[]
+  @OneToMany(
+    (type) => Admindashboards,
+    (admindashboard) => admindashboard.admin,
+    { cascade: ['insert', 'update'] },
+  )
+  admindashboard: Admindashboards[];
+
+  //   @OneToMany((type) => OutterUsers, (outterusers) => outterusers.admin)
+  //   outterusers: OutterUsers[];
+
+  @OneToMany((type) => AccessMembers, (accessmembers) => accessmembers.admins)
+  accessmembers: AccessMembers[];
+
+  @ManyToMany((type) => Days)
+  @JoinTable()
+  M_days: Days[];
 }
 
-@Entity("admindashboards")
-export class Admindashboards{
+@Entity('admindashboards')
+export class Admindashboards {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id:number
-    
-    @Column({type:"varchar"})
-    title:string
-    
-    @Column({type:"text"})
-    description:string
-    
-    @Column({type:"datetime"})
-    createdAt:Date
-    
-    @Column({type:"datetime"})
-    updatedAt:Date
-    
-    @Column({type:"datetime"})
-    deletedAt:Date
+  @Column({ type: 'varchar' })
+  title: string;
 
-    @ManyToOne(type=>Admins , admin=>admin.admindashboard)
-    admin:Admins
+  @Column({ type: 'text' })
+  description: string;
 
-    @ManyToOne(type=>Group , group=>group.admindashboard)
-    group:Admins
-    
+  @Column({ type: 'datetime' })
+  createdAt: Date;
+
+  @Column({ type: 'datetime' })
+  updatedAt: Date;
+
+  @Column({ type: 'datetime' })
+  deletedAt: Date;
+
+  @ManyToOne((type) => Admins, (admin) => admin.admindashboard, {
+    cascade: ['insert', 'update'],
+  })
+  admin: Admins;
+
+  @ManyToOne((type) => Group, (group) => group.admindashboard, {
+    cascade: ['insert', 'update'],
+  })
+  group: Group;
 }
 
-@Entity("days")
-export class Days{
-    
-    @PrimaryGeneratedColumn()
-    id:number
+@Entity('days')
+export class Days {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({type:"varchar",length:20})
-    name:string
+  @Column({ type: 'varchar', length: 20 })
+  name: string;
 }
