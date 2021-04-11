@@ -49,9 +49,8 @@ export class RegisterOutterUser {
   description: string;
   createdAt: Date;
   phoneNumber: number;
-  user: number;
+  username: string;
   group: number;
   groupbygroup: number;
-
-  m_outterImages: number;
+  // m_outterImages: number;
 }

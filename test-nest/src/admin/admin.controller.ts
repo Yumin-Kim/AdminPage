@@ -24,6 +24,7 @@ import {
   CreateDashBoardDto,
   LoginUserDto,
   RegisterInnerUser,
+  RegisterOutterUser,
   SignUpUserDto,
   UpdateDashBoardDto,
 } from './dtos/admin.dto';
@@ -103,6 +104,14 @@ export class AdminController {
     return await this.adminService.registerInnerUser(registerInnerUser);
   }
 
+  @Post('/registering/outter')
+  async registerOutterUser(
+    @Body() registerOutterUser: RegisterOutterUser,
+  ): Promise<any> {
+    return this.adminService.registerOutterUser(registerOutterUser);
+  }
+
+  ///////////////////////////////////
   //single Inner Image Upload
   @Post('/registering/inner/upload')
   @UseInterceptors(
@@ -155,9 +164,7 @@ export class AdminController {
       data: response,
     };
   }
-
-  @Post('/registering/outter')
-  async registerOutterUser() {}
+  ///////////////////////////////////
 
   @Get('/chart/user')
   async getChartUserInfo() {}

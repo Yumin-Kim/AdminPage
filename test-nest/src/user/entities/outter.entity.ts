@@ -25,7 +25,7 @@ export class OutterUsers {
   @Column({ type: 'datetime' })
   createdAt: Date;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'datetime', nullable: true })
   updatedAt: Date;
 
   @Column({ type: 'varchar', length: 50 })

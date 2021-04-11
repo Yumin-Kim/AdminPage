@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IBasicQuery } from 'src/user/dtos/querystring';
 import { Images, OutterImages } from 'src/user/entities/image.entity';
+import { OutterUsers } from 'src/user/entities/outter.entity';
 import { Group, User } from 'src/user/entities/users.entity';
 import { Repository } from 'typeorm';
 import {
   CreateDashBoardDto,
   LoginUserDto,
   RegisterInnerUser,
+  RegisterOutterUser,
   SignUpUserDto,
   UpdateDashBoardDto,
 } from './dtos/admin.dto';
@@ -25,12 +27,10 @@ export class AdminService {
     private dayRepository: Repository<Days>,
     @InjectRepository(Images)
     private imageRepository: Repository<Images>,
-
-    // @InjectRepository(OutterImages)
-    // private outterImageRepository: Repository<OutterImages>,
-    // @InjectRepository(Group)
-    // private groupRepository: Repository<Group>,
-
+    @InjectRepository(OutterImages)
+    private outterUserImageRespositoty: Repository<OutterImages>,
+    @InjectRepository(OutterUsers)
+    private outterUserRepository: Repository<OutterUsers>,
     @InjectRepository(Admindashboards)
     private adminDashBoardRepository: Repository<Admindashboards>, // @InjectRepository(User) // private userRepository: Repository<User>,
   ) {}
@@ -129,12 +129,43 @@ export class AdminService {
     const InsertImageReseult = await this.imageRepository.save(imagetable);
     userTable.M_images = [InsertImageReseult] as Images[];
 
-    const data = await this.userRepository.save(userTable);
+    await this.userRepository.save(userTable);
 
     return { message: 'Success' };
   }
 
-  async registerOutterUser() {}
+  async registerOutterUser(
+    registerOutterUser: RegisterOutterUser,
+  ): Promise<any> {
+    const outterUserTable = new OutterUsers();
+    const outterImageTable = new OutterImages();
+    const filterUser = await this.userRepository.findOne({
+      where: {
+        name: registerOutterUser.username,
+      },
+    });
+    if (!filterUser) return { message: '없는 회원을 입력!!' };
+
+    Object.keys(registerOutterUser).map((member: keyof OutterUsers) => {
+      if (member === ('username' as any)) return;
+      (outterUserTable[member] as number | string | Date) = registerOutterUser[
+        member
+      ];
+    });
+
+    outterImageTable.imageCount = 1;
+    outterImageTable.name = registerOutterUser.name;
+    outterImageTable.createdAt = registerOutterUser.createdAt;
+
+    const InsertImageReseult = await this.outterUserImageRespositoty.save(
+      outterImageTable,
+    );
+    outterUserTable.m_outterImages = [InsertImageReseult] as any;
+
+    await this.outterUserRepository.save(outterUserTable);
+
+    return { message: '성공' };
+  }
 
   async getChartUserInfo() {}
 

@@ -8,6 +8,7 @@ import { OutterImages, Images } from 'src/user/entities/image.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from 'src/auth/auth.module';
 import { AuthService } from 'src/auth/auth.service';
+import { OutterUsers } from 'src/user/entities/outter.entity';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthService } from 'src/auth/auth.service';
       User,
       Images,
       OutterImages,
+      OutterUsers,
     ]),
   ],
   exports: [AdminService],
