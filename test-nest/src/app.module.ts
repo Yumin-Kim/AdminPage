@@ -24,19 +24,31 @@ import { FacilityService } from './facility/facility.service';
 import { UserService } from './user/user.service';
 import { UsercarService } from './usercar/usercar.service';
 import { VotingService } from './voting/voting.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type:"mysql",
-    host:"localhost",
-    port:3306,
-    username:"root",
-    password:"admin",
-    database:"test",
-    entities:[__dirname + "./**/**/*/entitiy{.ts}"],
-    autoLoadEntities:true,
-    synchronize:true
-  }), AppModule,UserModule,AdminModule,VotingModule,PetitionModule,FacilityModule,UsercarModule,PricingModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'admin',
+      database: 'test',
+      entities: [__dirname + './**/**/*/entitiy{.ts}'],
+      autoLoadEntities: true,
+      synchronize: true,
+      charset: 'utf8mb4',
+    }),
+    AuthModule,
+    UserModule,
+    AdminModule,
+    VotingModule,
+    PetitionModule,
+    FacilityModule,
+    UsercarModule,
+    PricingModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

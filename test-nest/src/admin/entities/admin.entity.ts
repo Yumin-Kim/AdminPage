@@ -40,7 +40,7 @@ export class Admins {
   @OneToMany((type) => AccessMembers, (accessmembers) => accessmembers.admins)
   accessmembers: AccessMembers[];
 
-  @ManyToMany((type) => Days)
+  @ManyToMany((type) => Days, { cascade: true })
   @JoinTable()
   M_days: Days[];
 }

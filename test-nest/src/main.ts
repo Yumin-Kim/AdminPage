@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
+import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +16,19 @@ async function bootstrap() {
   //baseURL Change /api
   app.setGlobalPrefix('api');
 
+  // app.use(cookieParser());
+  // app.use(
+  //   session({
+  //     resave: false,
+  //     saveUninitialized: false,
+  //     secret: 'hello',
+  //     cookie: {
+  //       httpOnly: true,
+  //     },
+  //   }),
+  // );
+  // app.use(passport.initialize());
+  // app.use(passport.session());
   // app.useGlobalPipes(
   //   new ValidationPipe({
   //     whitelist: true,
@@ -24,7 +39,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('document', app, document);
-
   await app.listen(3000);
 }
 bootstrap();
