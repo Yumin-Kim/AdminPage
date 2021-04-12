@@ -37,7 +37,7 @@ export class AdminController {
   constructor(
     private readonly adminService: AdminService,
     private authService: AuthService,
-  ) {}
+  ) { }
   @UseGuards(AuthGuard('jwt'))
   @Get('/dashboard')
   async getDashBoardInfo(
@@ -95,7 +95,7 @@ export class AdminController {
   }
 
   @Post('logout')
-  async logoutAdminInfo() {}
+  async logoutAdminInfo() { }
 
   @Post('/registering/inner')
   async registerInnerUser(
@@ -167,14 +167,24 @@ export class AdminController {
   ///////////////////////////////////
 
   @Get('/chart/user')
-  async getChartUserInfo() {}
+  async getChartUserInfo(
+    @Query() sqlCount: IBasicQuery,
+  ) {
+    return this.adminService.getChartUserInfo(sqlCount);
+  }
 
-  @Get('/chart/parking')
-  async getChartParkingInfo() {}
+  @Get('/chart/parking/:startpoint/:endpoint')
+  async getChartParkingInfo(
+    @Param("startpoint") startPoint: number,
+    @Param("endpoint") endpoint: number,
+    @Query() sqlCount: IBasicQuery,
+  ) {
+    return this.adminService.getChartParkingInfo(startPoint, endpoint, sqlCount)
+  }
 
   @Get('/chart/exituser')
-  async getChartExitUserInfo() {}
+  async getChartExitUserInfo() { }
 
   @Get('/chart/totalcount')
-  async getChartTotalInfo() {}
+  async getChartTotalInfo() { }
 }
