@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IBasicQuery } from 'src/user/dtos/querystring';
 import { Images, OutterImages } from 'src/user/entities/image.entity';
 import { OutterUsers } from 'src/user/entities/outter.entity';
-import { Group, User } from 'src/user/entities/users.entity';
+import { AccessMembers, Group, User } from 'src/user/entities/users.entity';
+import { ParkingInfos } from 'src/usercar/entities/usercar.entity';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import {
   CreateDashBoardDto,
@@ -33,6 +34,10 @@ export class AdminService {
     private outterUserRepository: Repository<OutterUsers>,
     @InjectRepository(Admindashboards)
     private adminDashBoardRepository: Repository<Admindashboards>, // @InjectRepository(User) // private userRepository: Repository<User>,
+    @InjectRepository(ParkingInfos)
+    private parkingInfoRepository: Repository<ParkingInfos>,
+    @InjectRepository(AccessMembers)
+    private accessMembersRepository: Repository<AccessMembers>
   ) { }
   async getDashBoardInfo(sqlCount: IBasicQuery): Promise<Admindashboards[]> {
     return await this.adminDashBoardRepository.find({
@@ -220,16 +225,42 @@ export class AdminService {
     return mergeObject
   }
 
+  /// 수정 요함
   async getChartParkingInfo(
     startPoint: number,
     endPoint: number,
     sqlCount: IBasicQuery
   ): Promise<any> {
-    console.log(startPoint, endPoint, sqlCount);
+    const asyncPushTask = [];
+    Array(endPoint - startPoint + 1).fill(0).map((member, index) => {
+      asyncPushTask.push(this.parkingInfoRepository.find({
+        relations: ["group", "user"],
+        where: {
+          group: Number(startPoint) + index
+        }
+      }));
+    })
+    const data = await Promise.all(asyncPushTask)
+
+    return data
 
   }
 
-  async getChartExitUserInfo() { }
+  async getChartExitUserInfo(endpoint: number) {
+    console.log(endpoint);
+
+    const data = await Promise.all(
+      Array(endpoint).fill(null).map((params, index) => {
+        return this.accessMembersRepository.find({
+          where: {
+
+          }
+        })
+      })
+    )
+
+    return data
+  }
 
   async getChartTotalInfo() { }
 

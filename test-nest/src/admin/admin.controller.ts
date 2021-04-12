@@ -183,7 +183,11 @@ export class AdminController {
   }
 
   @Get('/chart/exituser')
-  async getChartExitUserInfo() { }
+  async getChartExitUserInfo(
+    @Query() endpoint: number
+  ) {
+    return this.adminService.getChartExitUserInfo(endpoint)
+  }
 
   @Get('/chart/totalcount')
   async getChartTotalInfo() { }
