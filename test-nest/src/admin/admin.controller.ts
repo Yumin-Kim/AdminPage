@@ -29,7 +29,11 @@ import {
   UpdateDashBoardDto,
 } from './dtos/admin.dto';
 import { Admindashboards, Admins } from './entities/admin.entity';
-import { ISignUpDayQuery } from './entities/querystring';
+import {
+  DateChart,
+  ISignUpDayQuery,
+  TotalTableClass,
+} from './entities/querystring';
 import { editFileName, imageFileFilter } from './middleware/image-upload';
 
 @Controller('admin')
@@ -37,7 +41,7 @@ export class AdminController {
   constructor(
     private readonly adminService: AdminService,
     private authService: AuthService,
-  ) { }
+  ) {}
   @UseGuards(AuthGuard('jwt'))
   @Get('/dashboard')
   async getDashBoardInfo(
@@ -95,7 +99,7 @@ export class AdminController {
   }
 
   @Post('logout')
-  async logoutAdminInfo() { }
+  async logoutAdminInfo() {}
 
   @Post('/registering/inner')
   async registerInnerUser(
@@ -167,28 +171,31 @@ export class AdminController {
   ///////////////////////////////////
 
   @Get('/chart/user')
-  async getChartUserInfo(
-    @Query() sqlCount: IBasicQuery,
-  ) {
+  async getChartUserInfo(@Query() sqlCount: IBasicQuery) {
     return this.adminService.getChartUserInfo(sqlCount);
   }
 
   @Get('/chart/parking/:startpoint/:endpoint')
   async getChartParkingInfo(
-    @Param("startpoint") startPoint: number,
-    @Param("endpoint") endpoint: number,
+    @Param('startpoint') startPoint: number,
+    @Param('endpoint') endpoint: number,
     @Query() sqlCount: IBasicQuery,
   ) {
-    return this.adminService.getChartParkingInfo(startPoint, endpoint, sqlCount)
+    return this.adminService.getChartParkingInfo(
+      startPoint,
+      endpoint,
+      sqlCount,
+    );
   }
 
   @Get('/chart/exituser')
-  async getChartExitUserInfo(
-    @Query() endpoint: number
-  ) {
-    return this.adminService.getChartExitUserInfo(endpoint)
+  async getChartExitUserInfo(@Query() endpoint: DateChart) {
+    return this.adminService.getChartExitUserInfo(endpoint);
   }
 
+  //querystring에 따라서
   @Get('/chart/totalcount')
-  async getChartTotalInfo() { }
+  async getChartTotalInfo(@Query() totalTableClass: TotalTableClass) {
+    return this.adminService.getChartTotalInfo(totalTableClass);
+  }
 }
