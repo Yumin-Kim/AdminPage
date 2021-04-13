@@ -63,7 +63,7 @@ export class AdminService {
     private accessMembersRepository: Repository<AccessMembers>,
     @InjectRepository(VotingInfos)
     private votingInfosRepository: Repository<VotingInfos>,
-  ) { }
+  ) {}
   async getDashBoardInfo(sqlCount: IBasicQuery): Promise<Admindashboards[]> {
     return await this.adminDashBoardRepository.find({
       relations: ['admin', 'group'],
@@ -106,7 +106,7 @@ export class AdminService {
     data.updatedAt = createDashBoardDto.updatedAt;
     data.deletedAt = createDashBoardDto.deletedAt;
     data.admin = (createDashBoardDto.adminId as unknown) as Admins;
-    data.group = (createDashBoardDto.adminId as unknown) as Group;
+    data.group = (createDashBoardDto.groupId as unknown) as Group;
 
     await this.adminDashBoardRepository.save(data);
     return { message: 'Success' };
@@ -135,7 +135,7 @@ export class AdminService {
     });
   }
 
-  async logoutAdminInfo() { }
+  async logoutAdminInfo() {}
 
   //이미지 저장
   async registerInnerUser(registerInnerUser: RegisterInnerUser): Promise<any> {
