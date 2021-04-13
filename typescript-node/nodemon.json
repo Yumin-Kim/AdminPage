@@ -1,0 +1,5 @@
+{
+  "watch": ["test-nodeTypeScript"],
+  "ext": "tsconfig.js",
+  "exec": "npx ts-node ./test-nodeTypeScript/index.ts"
+}
