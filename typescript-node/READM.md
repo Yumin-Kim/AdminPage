@@ -34,10 +34,33 @@
         - strictPropertyInitialzation
           - 옵션을 켜두면 초기화되지 않는 클래스의 멤버 변수에 대해 에러를 발생 시킨다. 초기화 시키는 방법으로는 속성에 기본값을 대입하거나 생성자에서 대입하는 두가지 방법존재
 
-   7. Modul Resolution : 모듈의 path를 resolve하는 설정
-   8. baseurl : TypeScript가 complie할 때 소스 코드의 가장 상위 base directory , root directory를 설정함 다른 파일에서 import등을 하여 경로를 명시해야 할때 상대 경로를 사용하지 않아도 baseurl이 명시된 곳ㅇ르 기준으로 절대결로 처럼 시작점을 명시해준다.
-   9. paths : 모듈 import시 반복되는 path를 사용하거나 깊이가 길어지면 path 길어지는것을 해결
-   10. Expertimental : JavaScript에 확실히 추가된 기능은 아닐지라도 실험적인 문법 지원 기능
-   11. noEmitOnError : true설정하면 에러 발생시 javascript소스 코드 , soure-maps, declartion이 dist에 생기지 않는다
-   12. skipLibCheck : 사용하는 라이브러리 파일의 타입 검사를 skip하게 하며 type 검사 정확도를 조금 희생하고 컴파일 시간 줄임 true 권장
-   13. noErroTruncation : 에러 메세지 잘리지 않게함
+3. Modul Resolution : 모듈의 path를 resolve하는 설정
+4. baseurl : TypeScript가 complie할 때 소스 코드의 가장 상위 base directory , root directory를 설정함 다른 파일에서 import등을 하여 경로를 명시해야 할때 상대 경로를 사용하지 않아도 baseurl이 명시된 곳ㅇ르 기준으로 절대결로 처럼 시작점을 명시해준다.
+5. paths : 모듈 import시 반복되는 path를 사용하거나 깊이가 길어지면 path 길어지는것을 해결
+6. Expertimental : JavaScript에 확실히 추가된 기능은 아닐지라도 실험적인 문법 지원 기능
+7. noEmitOnError : true설정하면 에러 발생시 javascript소스 코드 , soure-maps, declartion이 dist에 생기지 않는다
+8. skipLibCheck : 사용하는 라이브러리 파일의 타입 검사를 skip하게 하며 type 검사 정확도를 조금 희생하고 컴파일 시간 줄임 true 권장
+9. noErroTruncation : 에러 메세지 잘리지 않게함
+
+# Typescript에서의 interfaace와 class 차이
+* class는 동일한 구성을 공유하는 객체를 만들 수 있는 blueprint다. interface는 객체를 설명하는 관련 속성 및 메소드의 그룹이지만 구현이나 초기화는 제공하지 않는다.
+* 두 구조는 모두 객체가 어떻게 생겼는지 정의하기 때문에 두개 모두 타입스크립트에서 변수의 타입을 체크하는 용으로 쓰일 수 있다. >> 클래스나 인터페이스 중 무엇을 사용할지는 **사용 케이스에 따라 다르며 타입체크만 하는 경우 새로운 인스턴스를 생성하거나 아니면 둘다 해야면 클래스를 사용하면 타입을 채크하고 구현(인스턴스 생성)까지  할 수 있지만 인터 페이스를 통해서는 할 수 없다.**
+* TypeScript class
+  * ES6부터 class를 사용할수 있으며 타입 체크와 정적 프로퍼티같은 추가 기능으로 js 클래스를 향상시킨다.
+  * 인스터스를 생성할 필요가 없을 떄 interface사용하는것이 편리하다.
+  * 강력한 타이핑을 위해 디자인 및 컴파일 시간 동안 사용되는 유형을 정의 할 수 있으며 추가로 런타임 동안 사용
+* TypeScript interface
+  * 클래스와 달리 인터페이스는 TypeScript컨텍스트 내에만 존재하는 가상 구조
+  * TypeScript컴파일러는 타입 체크 목적으로만 인터페이스를 사용한다.(JavsScript로 트랜스파일 후에는 코드에서 인터페이스는 사라진다.)
+  * interface는 선언만 존재하며 속성 과 method는 선언 할 수 있지만 접근 제한자는 설정할수 없다.
+  * interface간의 다중 상속이 가능하다.
+  * **인터페이스 사용 시기 : 둘 이상의 위치, 특히 둘 이상의 파일 또는 함수에서 사용될 객체의 속성 및 함수 타입을 지정하기 위해서**
+* **클래스는 프로퍼티 초기화 와 메소드 구현을 제공함으로써 팩토리나 싱글톤을 정의 할 수 있었던 반면 인터페이스는 객체의 프로퍼티를 정의하는 단순히 구조 계약이다.**
+
+### 커스텀 객체를 생성할 필요가 있으면서 타입체크의 이점을 얻으려면 클래스를 사용 , 인스턴스를 생성하지 않을 경우에는 인터페이스를 사용 할수 있는데 트랜스파일된 자바스크립트에서는 코드를 생성하지 않으면서 가상으로 타입체크를 할 수 있다.
+
+
+
+
+
+
