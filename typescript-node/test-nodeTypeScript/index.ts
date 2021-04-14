@@ -41,13 +41,13 @@ type Result_StackOverFlow<T> = {
   [Key in keyof T]: () => T[Key]
 }
 
-const transform_StackOverFlow = <T extends Mapper<T>>(obj: T): Result<T> => {
+const transform_StackOverFlow = <T extends object>(obj: T): Result_StackOverFlow<T> => {
   return (Object.keys(obj) as Array<keyof T>).reduce((result, key) => {
     result[key] = () => obj[key];
     return result;
-  }, {} as Result<T>)
+  }, {} as Result_StackOverFlow<T>)
 }
-
+type Test = keyof typeof hash
 type Hash = typeof hash;
 const a = transform<Hash>(hash);
 const b = transform_StackOverFlow(hash)
