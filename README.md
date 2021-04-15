@@ -23,6 +23,21 @@
     * 시작 기간 : 2021 . 02 .17 ~
     * 재시작 기간 : 2021 .04 .05
     * 마감 예정 기간 : 2021 . 06 . 05 생각중!!
+    * 1차 서버 개발 정리 : 2021 . 04 . 15 
+
+---
+
+## TodoList
+1. 2021 04 15
+    * 이전 <a href="https://github.com/Yumin-Kim/FlaskServer_FaceDetector/blob/master/API.md">API.md github</a>사이트와 같이 백엔드를 구성하였지만 return JSON의 값이 명확하게 정의 되지 않아 정리가 안됨
+    * 현재 서버에서 응답해주는 데이터 타입이나 정보를 정리요함
+    * 진행 순서
+        1. 서버 응답 데이터 타입 정보 정의 >> 정의하지 않으면 프론트 type에 어려움 발생 예정
+        2. 프론트 기능명세서 작성 및 return 타입 정의 >> 향후 Redux 활용에 편리
+        3. 간단한 디자인 진행
+        4. 프론트 개발 시작 
+
+    
 
 ### 개발에 있어 필요한 자료
 * <a href="https://medium.com/crocusenergy/nestjs-typeorm-%EA%B8%B0%EB%B3%B8-crud-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-69b9640dc826">NestJS , TypeORM관련 포스팅</a>이며 기초 잘설명되어 있다.
