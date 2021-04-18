@@ -11,6 +11,8 @@ export class AuthService {
   }
 
   async validateUser(payload: any): Promise<any> {
+    console.log(payload);
+
     return await this.adminService.findOne(payload);
   }
 }

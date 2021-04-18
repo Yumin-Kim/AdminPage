@@ -27,6 +27,7 @@ export class UsercarService {
   async getFilterUserCarInfo(usercarQuert: UserCarQueryDto) {
     const queryUserCardata = new UserCarQueryDto(usercarQuert);
     const parseUserCarData = queryUserCardata.filterGetObject(queryUserCardata);
+
     if (parseUserCarData.user) {
       const data = await this.userRepos.findOne({
         where: {

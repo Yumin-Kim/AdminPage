@@ -10,7 +10,7 @@ export class PetitionController {
   @Get('')
   async getPetitionInfo(
     @Query() sqlCount: IBascicQuery,
-    @Query('stage') kind: typeof petitionKind[number],
+    @Query('kind') kind: typeof petitionKind[number],
   ) {
     return await this.petitionService.getPetitionInfo({ ...sqlCount, kind });
   }

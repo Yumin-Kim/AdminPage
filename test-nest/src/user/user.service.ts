@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
-import { LessThan, MoreThan, Repository } from 'typeorm';
+import { FindOperator, LessThan, MoreThan, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import {
   filterGroup_GroupByObject,
@@ -47,26 +47,16 @@ export class UserService {
     });
   }
 
-  getFiliterhuman({
-    offset,
-    limit,
-    host,
-    memberIndex,
-    phoneNumber,
-  }: MergeHumanQueryString): Promise<User[]> {
-    //where OR
-    // let valid=[];
-    // if(host) valid.push({host});
-    // if(memberIndex) valid.push({memberIndex});
-    // if(phoneNumber) valid.push({phoneNumber});
-    // console.log(valid.map(v=>v));
-
+  getFiliterhuman(
+    { host, memberIndex, phoneNumber }: Record<keyof IFilterHumanQuery, string>,
+    { offset, limit }: IBasicQuery,
+  ): Promise<any> {
     let mergeQuerystringObject: IFilterHumanQuery = {};
-    if (host) mergeQuerystringObject.host = host;
-    if (memberIndex) mergeQuerystringObject.memberIndex = memberIndex;
+    if (host) mergeQuerystringObject.host = host === 'true' ? true : false;
+    if (memberIndex) mergeQuerystringObject.memberIndex = Number(memberIndex);
     if (phoneNumber) mergeQuerystringObject.phoneNumber = phoneNumber;
-
     return this.userRepository.find({
+      relations: ['group', 'groupbygroup'],
       where: mergeQuerystringObject,
       skip: offset,
       take: limit,
@@ -85,9 +75,11 @@ export class UserService {
       if (queryString['minWeight'])
         data.minWeight = (MoreThan(queryString.minWeight) as unknown) as number;
       if (queryString['pricing'])
+        data.pricing = (LessThan(queryString.pricing) as unknown) as number;
+      if (queryString['name'])
         data.name = (LessThan(queryString.name) as unknown) as number;
-      if (queryString['name']) data.name = queryString.name;
-      if (queryString['roomCount']) data.roomCount = queryString.roomCount;
+      if (queryString['roomCount'])
+        data.roomCount = Number(queryString.roomCount);
 
       const groupData = await this.groupRepository.find(data);
       return await Promise.all(
@@ -110,11 +102,14 @@ export class UserService {
         }),
       );
     } else {
-      let data: IFilterGroupBy = {};
-
-      if (queryString['pricing'])
-        data.pricing = (LessThan(queryString.pricing) as unknown) as number;
-      if (queryString['name']) data.name = queryString.name;
+      interface FilterGroupBy {
+        name?: FindOperator<number>;
+        repairCount?: number;
+        pricing?: FindOperator<number>;
+      }
+      let data: FilterGroupBy = {};
+      if (queryString['pricing']) data.pricing = LessThan(queryString.pricing);
+      if (queryString['name']) data.name = LessThan(Number(queryString.name));
       if (queryString['repairCount'])
         data.repairCount = queryString.repairCount;
 
@@ -225,12 +220,14 @@ export class UserService {
     queryString: IFilterFullTable,
     sqlCount: IBasicQuery,
   ): Promise<any> {
+    console.log(queryString);
+
     const parseQueryUserColumn = parseQueryString(
       queryString as IFilterHumanQuery,
       ['host', 'memberIndex', 'phoneNumber'],
       {} as IFilterHumanQuery,
     );
-
+    console.log(parseQueryUserColumn);
     const parseQueryGroupColumn = parseQueryString(
       queryString,
       ['maxWeight', 'minWeight', 'pricing', 'name', 'roomCount'],

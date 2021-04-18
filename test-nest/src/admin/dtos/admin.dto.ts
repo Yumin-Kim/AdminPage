@@ -39,9 +39,6 @@ export class RegisterInnerUser {
   group: number;
   groupbygroup: number;
   phoneNumber: string;
-  // imageCount: number;
-
-  // M_images: number;
 }
 
 export class RegisterOutterUser {

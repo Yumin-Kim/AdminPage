@@ -34,9 +34,14 @@ export class UserController {
   //사람만 조회
   @Get('/filter/human')
   async getFiliterhuman(
-    @Query() querystring: MergeHumanQueryString,
+    @Query() querystring: Record<keyof IFilterHumanQuery, string>,
+    @Query('offset') offset: number,
+    @Query('limit') limit: number,
   ): Promise<User[]> {
-    return await this.userService.getFiliterhuman(querystring);
+    return await this.userService.getFiliterhuman(querystring, {
+      offset,
+      limit,
+    });
   }
 
   //group , groupByGroup

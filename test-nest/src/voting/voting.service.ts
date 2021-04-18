@@ -39,8 +39,6 @@ export class VotingService {
         where: { name },
       });
     }
-    console.log(findUserId);
-
     if (!findUserId) return { message: 'Not found user name' };
     const votingInfo = new VotingInfos();
     ['title', 'description', 'createdAt'].map(
@@ -57,6 +55,7 @@ export class VotingService {
   }
   async getProgressVotingInfo({ offset, limit }: IBasicQuery) {
     return await this.votingInfoRepository.find({
+      relations: ['user', 'group', 'groupbygroup'],
       where: {
         createdAt: MoreThan(`2021-${new Date().getUTCMonth() - 2}-01`),
       },
@@ -65,6 +64,7 @@ export class VotingService {
   }
   async getdeadlineVotingInfo({ year, date, nextdate, nextyear }: T_dateInfo) {
     return await this.votingInfoRepository.find({
+      relations: ['user', 'group', 'groupbygroup'],
       where: {
         deletedAt: Between(`${year}-${date}-01`, `${nextyear}-${nextdate}-01`),
       },

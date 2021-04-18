@@ -35,7 +35,6 @@ import {
   TotalTableClass,
 } from './entities/querystring';
 import { editFileName, imageFileFilter } from './middleware/image-upload';
-
 @Controller('admin')
 export class AdminController {
   constructor(
@@ -46,17 +45,22 @@ export class AdminController {
   @Get('/dashboard')
   async getDashBoardInfo(
     @Query() sqlCount: IBasicQuery,
+    @Request() req: any,
   ): Promise<Admindashboards[]> {
     return await this.adminService.getDashBoardInfo(sqlCount);
+    // return { admin: req.user, dashboard: data };
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch('/dashboard')
   async updateDashBoardInfo(
+    @Request() req: any,
     @Body() updateDashboardDto: UpdateDashBoardDto,
   ): Promise<Admindashboards> {
     return await this.adminService.updateDashBoardInfo(updateDashboardDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/dashboard/:id')
   async deleteDashBoardInfo(
     @Query('offset') offset: number,
@@ -65,12 +69,14 @@ export class AdminController {
     return await this.adminService.deleteDashBoardInfo(offset, id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/dashboard')
   async createDashBoardInfo(
     @Body() createDashBoardDto: CreateDashBoardDto,
   ): Promise<any> {
     return this.adminService.createDashBoardInfo(createDashBoardDto);
   }
+  // @UseGuards(AuthGuard('jwt'))
   @Post('/signup')
   async signupAdminInfo(
     @Body() signUpUserDto: SignUpUserDto,
@@ -87,6 +93,9 @@ export class AdminController {
   @Post('/login')
   async loginAdminInfo(@Body() loginUserDto: LoginUserDto): Promise<any> {
     const user = await this.adminService.loginAdminInfo(loginUserDto);
+    if (!user) {
+      return { message: '이메일 비밀번호 확인이 필요합니다' };
+    }
     console.log(user);
 
     const payload = {
@@ -98,9 +107,11 @@ export class AdminController {
     return { user, token };
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('logout')
   async logoutAdminInfo() {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/registering/inner')
   async registerInnerUser(
     @Body() registerInnerUser: RegisterInnerUser,
@@ -108,6 +119,7 @@ export class AdminController {
     return await this.adminService.registerInnerUser(registerInnerUser);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('/registering/outter')
   async registerOutterUser(
     @Body() registerOutterUser: RegisterOutterUser,
@@ -117,6 +129,7 @@ export class AdminController {
 
   ///////////////////////////////////
   //single Inner Image Upload
+  @UseGuards(AuthGuard('jwt'))
   @Post('/registering/inner/upload')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -141,6 +154,7 @@ export class AdminController {
   }
 
   //multi Inner Image Upload
+  @UseGuards(AuthGuard('jwt'))
   @Post('/registering/inner/uploads')
   @UseInterceptors(
     FilesInterceptor('image', 10, {
@@ -169,12 +183,12 @@ export class AdminController {
     };
   }
   ///////////////////////////////////
-
+  @UseGuards(AuthGuard('jwt'))
   @Get('/chart/user')
   async getChartUserInfo(@Query() sqlCount: IBasicQuery) {
     return this.adminService.getChartUserInfo(sqlCount);
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get('/chart/parking/:startpoint/:endpoint')
   async getChartParkingInfo(
     @Param('startpoint') startPoint: number,
@@ -187,13 +201,14 @@ export class AdminController {
       sqlCount,
     );
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get('/chart/exituser')
   async getChartExitUserInfo(@Query() endpoint: DateChart) {
     return this.adminService.getChartExitUserInfo(endpoint);
   }
 
   //querystring에 따라서
+  @UseGuards(AuthGuard('jwt'))
   @Get('/chart/totalcount')
   async getChartTotalInfo(@Query() totalTableClass: TotalTableClass) {
     return this.adminService.getChartTotalInfo(totalTableClass);

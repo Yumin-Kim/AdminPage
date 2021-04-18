@@ -108,8 +108,13 @@ export class AdminService {
     data.admin = (createDashBoardDto.adminId as unknown) as Admins;
     data.group = (createDashBoardDto.groupId as unknown) as Group;
 
-    await this.adminDashBoardRepository.save(data);
-    return { message: 'Success' };
+    const saveAdminDashBoard = await this.adminDashBoardRepository.save(data);
+    return await this.adminDashBoardRepository.findOne({
+      where: {
+        id: saveAdminDashBoard.id,
+      },
+      relations: ['admin', 'group'],
+    });
   }
 
   async signupAdminInfo(signUpUserDto: SignUpUserDto): Promise<any> {
@@ -130,9 +135,11 @@ export class AdminService {
   //passport 사용하기
   //간편 로그인 기능 확장성 생각하기
   async loginAdminInfo(loginUserDto: LoginUserDto): Promise<Admins> {
-    return await this.adminRepository.findOne({
+    const data = await this.adminRepository.findOne({
       where: loginUserDto,
+      relations: ['group'],
     });
+    return data;
   }
 
   async logoutAdminInfo() {}
@@ -194,7 +201,7 @@ export class AdminService {
 
     await this.outterUserRepository.save(outterUserTable);
 
-    return { message: '성공' };
+    return { message: 'success' };
   }
 
   async getChartUserInfo(sqlCount: IBasicQuery) {
@@ -204,6 +211,8 @@ export class AdminService {
     Array(limit - offset)
       .fill(offset)
       .map((member, index) => {
+        console.log(member, index);
+
         asyncPushTask.push(
           this.userRepository.find({
             where: {
@@ -312,7 +321,19 @@ export class AdminService {
           return data;
         }),
     );
-    return data;
+    interface IData {
+      id: number;
+      admisssionTime: Date;
+    }
+    const pushData = [];
+    ((data as unknown) as IData[][]).map<IData[]>((member): any => {
+      const object = {} as any;
+      object['admisssionTime'] = member[0].admisssionTime;
+      object['length'] = member.length;
+      pushData.push(object);
+    });
+
+    return pushData;
   }
 
   async getChartTotalInfo(totalTableClass: Partial<TotalTableClass>) {
@@ -371,10 +392,10 @@ export class AdminService {
   }
 
   async findOne(payload: any): Promise<Admins | undefined> {
-    console.log('findOne');
     const { email } = payload;
-    console.log(email);
-
-    return await this.adminRepository.findOne({ where: { email } });
+    return await this.adminRepository.findOne({
+      where: { email },
+      relations: ['group'],
+    });
   }
 }
