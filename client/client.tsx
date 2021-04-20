@@ -10,34 +10,28 @@ import "antd/dist/antd.css"
 
 ///
 import Basic from '@layouts/Basic';
-import { decrease, increase } from '@test/counter';
 import rootReducer, { RootState } from '@test/store';
 import myLogger from '@test/Logger';
-
-
-// // render(
-// //   <BrowserRouter>
-// //     <Basic />
-// //   </BrowserRouter>,
-// //   document.getElementById('app'),
-// // );
+import { increaseBy, decrease, increase } from '@test/posts';
 interface ICounter {
   number: number;
-  onIncrease: any;
-  onDecrease: any;
+  onIncrease: () => void;
+  onDecrease: () => void;
+  increaseBy: (diff: number) => void;
 }
-const Counter: FC<ICounter> = ({ number, onIncrease, onDecrease }) => {
+const Counter: FC<ICounter> = ({ number, onIncrease, onDecrease, increaseBy }) => {
   return (
     <div>
       <h1>{number}</h1>
       <button onClick={onIncrease}>+1</button>
       <button onClick={onDecrease}>-1</button>
+      <button onClick={() => increaseBy(5)}>-1</button>
     </div>
   )
 }
 
 const CounterContainer = () => {
-  const number = useSelector((state: RootState) => state.counter);
+  const number = useSelector((state: RootState) => state.counter.counter);
   const dispath = useDispatch();
 
   const onIcrease = () => {
@@ -46,9 +40,16 @@ const CounterContainer = () => {
   const onDecrease = () => {
     dispath(decrease())
   }
-
+  const onIncreaseBy = (diff: number) => {
+    dispath(increaseBy(diff))
+  }
   return (
-    <Counter number={number} onIncrease={onIcrease} onDecrease={onDecrease} />
+    <Counter
+      number={number}
+      onIncrease={onIcrease}
+      increaseBy={onIncreaseBy}
+      onDecrease={onDecrease}
+    />
   )
 
 }
