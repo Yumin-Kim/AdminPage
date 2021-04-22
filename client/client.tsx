@@ -14,9 +14,13 @@ import rootReducer, { RootState } from '@test/store';
 import myLogger from '@test/Logger';
 import TodoApp from '@test/Components/TodoApp';
 import thunk from 'redux-thunk';
-
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
+import { CounterSagaState } from './test/sagatest/reducer';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '@test/sagatest/saga';
+// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+sagaMiddleware.run(rootSaga);
 render(
   <Provider store={store}>
     <TodoApp />
