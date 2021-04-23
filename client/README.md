@@ -31,21 +31,20 @@ adminStore : {
     createDashboardInfoLoading:false,
     createDashboardInfoError:false,
     createDashboardInfoSuccess:false,
-    
+    regiaterInnerInfoLoading : false,
+    regiaterOutterInfoLoading : false,
     adminsInfo:{
-
-    },
-    loginInfo:{
-    "user": {
-            id: 1,
-            name: "Oralia Normanvell",
-            password: "iitLY0E5Eqzn",
-            email: "onormanvell0@webeden.co.uk",
-            group: IGroupEntity,
-            M_days: Array<{id: 5,name: 5}>
-    },
-    token: string
-}
+        user: {
+                id: 1,
+                name: "Oralia Normanvell",
+                password: "iitLY0E5Eqzn",
+                email: "onormanvell0@webeden.co.uk",
+                group: IGroupEntity,
+                M_days: Array<{id: 5,name: 5}>
+        },
+        token: string
+    loginInfo:
+        
 }
 
 votingstore
