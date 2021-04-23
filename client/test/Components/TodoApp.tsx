@@ -1,6 +1,6 @@
+import useScore from '@hooks/useScore';
 import React from 'react';
 import { FC } from 'react';
-import TodoInsert from './TodoInsert';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { addTodo, removeTodo, toggleTodo } from '../todo';
@@ -10,7 +10,7 @@ const TodoApp: FC = () => {
   const { todos } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   console.log(todos);
-
+  const { score, onScoreDown, onScoreUp } = useScore()
   const onInsert = (text: string) => {
     dispatch(addTodo(text));
   };
@@ -25,7 +25,6 @@ const TodoApp: FC = () => {
 
   return (
     <>
-      <TodoInsert onInsert={onInsert} />
       <TodoList todos={todos} onToggle={ontoggle} onRemove={onRemove} />
     </>
   );

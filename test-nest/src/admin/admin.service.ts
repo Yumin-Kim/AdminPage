@@ -63,7 +63,7 @@ export class AdminService {
     private accessMembersRepository: Repository<AccessMembers>,
     @InjectRepository(VotingInfos)
     private votingInfosRepository: Repository<VotingInfos>,
-  ) {}
+  ) { }
   async getDashBoardInfo(sqlCount: IBasicQuery): Promise<Admindashboards[]> {
     return await this.adminDashBoardRepository.find({
       relations: ['admin', 'group'],
@@ -137,12 +137,12 @@ export class AdminService {
   async loginAdminInfo(loginUserDto: LoginUserDto): Promise<Admins> {
     const data = await this.adminRepository.findOne({
       where: loginUserDto,
-      relations: ['group'],
+      relations: ['group', "M_days"],
     });
     return data;
   }
 
-  async logoutAdminInfo() {}
+  async logoutAdminInfo() { }
 
   //이미지 저장
   async registerInnerUser(registerInnerUser: RegisterInnerUser): Promise<any> {
@@ -395,7 +395,7 @@ export class AdminService {
     const { email } = payload;
     return await this.adminRepository.findOne({
       where: { email },
-      relations: ['group'],
+      relations: ['group', "M_days"],
     });
   }
 }
