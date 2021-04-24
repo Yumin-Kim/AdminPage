@@ -16,5 +16,5 @@ function* watchScoreDown() {
   yield takeEvery(SCORE_DOWN, scoreDownAsync);
 }
 export default function* rootSaga() {
-  yield all([watchScoreDown, watchScoreUp]);
+  yield all([watchScoreDown(), watchScoreUp()]);
 }
