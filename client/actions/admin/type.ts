@@ -1,0 +1,15 @@
+export const LOGIN_ADMIN = 'LOGIN_ADMIN' as const;
+
+export const LOGIN = {
+  REQUEST: 'LOGIN_ADMIN_REQUEST',
+  SUCCESS: 'LOGIN_ADMIN_SUCCESS',
+  FAILURE: 'LOGIN_ADMIN_FAILURE',
+} as const;
+
+export const ADMIN_SIGNUP = 'ADMIN_SIGNUP' as const;
+
+export const SIGNUP = {
+  REQUEST: 'ADMIN_SIGNUP_REQUEST',
+  SUCCESS: 'ADMIN_SIGNUP_SUCCESS',
+  FAILURE: 'ADMIN_SIGNUP_FAILURE',
+} as const;

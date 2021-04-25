@@ -15,7 +15,7 @@ async function bootstrap() {
 
   //baseURL Change /api
   app.setGlobalPrefix('api');
-
+  app.enableCors();
   // app.use(cookieParser());
   // app.use(
   //   session({

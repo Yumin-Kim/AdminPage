@@ -85,9 +85,9 @@ function fetchEntity<T extends IEntityAction>({ ACTION, API }: T) {
 }
 
 const getUserSaga = fetchEntity(userEntity);
-export interface ResponseGenerator {
+export interface ResponseGenerator<T> {
   config?: any;
-  data?: any;
+  data: T;
   headers?: any;
   request?: any;
   status?: number;

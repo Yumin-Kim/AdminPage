@@ -21,7 +21,11 @@
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
       "@typings/*": ["typings/*"],
-      "@test/*": ["test/*"]
+      "@test/*": ["test/*"],
+      "@reducers/*": ["reducer/*"],
+      "@actions/*": ["actions/*"],
+      "@store/*": ["store/*"],
+      "@sagas/*": ["sagas/*"]
     }
   }
 }

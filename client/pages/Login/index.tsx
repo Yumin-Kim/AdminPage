@@ -1,6 +1,10 @@
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import { loginAdminActions, signupAdmin_action } from '@actions/admin/admin';
+import { LoginAdmin } from '@typings/admin';
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,24 +15,39 @@ const tailLayout = {
 };
 
 const Login = () => {
-  console.log('Login');
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const onFinish = () => {
+    dispatch(loginAdminActions.ACTION.REQUEST(form.getFieldValue()));
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+  const onClickSignup = useCallback(() => {
+    dispatch(
+      signupAdmin_action.ACTION.REQUEST({
+        name: '123',
+        email: 'dna;s0@maver.com',
+        M_days: [1, 2],
+        password: '123',
+        group: 12,
+      }),
+    );
+  }, []);
+
+  const onClickLogin = useCallback(() => {
+    console.log();
+
+    // dispatch()
+  }, []);
+
   return (
     <Row justify="center" align="middle" style={{ minHeight: '80vh' }}>
       <Col xs={{ span: 11, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-        <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-          >
+        <Form name="basic" form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your username!' }]}>
             <Input />
           </Form.Item>
 
@@ -45,8 +64,11 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
+            <Button type="primary" onClick={onClickSignup}>
+              test
+            </Button>
             <Button type="primary" htmlType="submit">
-              <Link to="/admin/main"> Submit</Link>
+              Submit
             </Button>
           </Form.Item>
         </Form>

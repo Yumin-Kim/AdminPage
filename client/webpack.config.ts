@@ -1,11 +1,11 @@
 import path from 'path';
-// import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import webpack from 'webpack';
 // import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-console.log(isDevelopment)
+console.log(isDevelopment);
 const config: webpack.Configuration = {
   name: 'sleact',
   mode: isDevelopment ? 'development' : 'production',
@@ -20,6 +20,10 @@ const config: webpack.Configuration = {
       '@utils': path.resolve(__dirname, 'utils'),
       '@typings': path.resolve(__dirname, 'typings'),
       '@test': path.resolve(__dirname, 'test'),
+      '@store': path.resolve(__dirname, 'store'),
+      '@reducers': path.resolve(__dirname, 'reducers'),
+      '@actions': path.resolve(__dirname, 'actions'),
+      '@sagas': path.resolve(__dirname, 'sagas'),
     },
   },
   entry: {
@@ -45,7 +49,7 @@ const config: webpack.Configuration = {
           plugins: ['@babel/plugin-proposal-class-properties'],
           env: {
             development: {
-              // plugins: [require.resolve('react-refresh/babel')],
+              plugins: [require.resolve('react-refresh/babel')],
             },
           },
         },
@@ -69,25 +73,25 @@ const config: webpack.Configuration = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: '/dist/',
+    publicPath: '/',
   },
   devServer: {
     historyApiFallback: true, // react router
     port: 3090,
     publicPath: '/dist/',
-    // // proxy: {
-    // //   '/api/': {
-    // //     target: 'http://localhost:3095',
-    // //     changeOrigin: true,
-    // //   },
+    // proxy: {
+    //   '/api/': {
+    //     target: 'http://localhost:3000',
+    //     changeOrigin: true,
+    //   },
     // },
   },
 };
 
 if (isDevelopment && config.plugins) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
-  // config.plugins.push(new ReactRefreshWebpackPlugin());
-  //   config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: true }));
+  config.plugins.push(new ReactRefreshWebpackPlugin());
+  // config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: true }));
 }
 // if (!isDevelopment && config.plugins) {
 //   config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
