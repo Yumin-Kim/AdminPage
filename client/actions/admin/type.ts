@@ -13,3 +13,5 @@ export const SIGNUP = {
   SUCCESS: 'ADMIN_SIGNUP_SUCCESS',
   FAILURE: 'ADMIN_SIGNUP_FAILURE',
 } as const;
+
+export const RETRY_ADMIN_SINUP = 'RETRY_ADMIN_SINUP' as const;

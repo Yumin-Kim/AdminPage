@@ -4,12 +4,16 @@ import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import session from 'express-session';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Logger } from '@nestjs/common';
+import myLogger from '../../client/test/Logger';
 
 // declare 키워드 타입스크립트 컴파일러에게 특정한 변수가 있다고 선언하는 키워드로 전역변수를 사용하거나 .d.ts 파일을 만들때 사용한다.
 declare var module: any;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    Logger:["error","warn","log"] 
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Test API Swagger')

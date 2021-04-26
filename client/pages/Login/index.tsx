@@ -1,10 +1,13 @@
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
-import { loginAdminActions, signupAdmin_action } from '@actions/admin/admin';
-import { LoginAdmin } from '@typings/admin';
+import { Form, Input, Button, Modal, Row, Col, FormInstance, message } from 'antd';
+import React, { useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useState } from 'react';
+import { loginAdminActions, signupAdmin_action, SignUpActions, retryAdminSignUpAction } from '@actions/admin/admin';
+import { LoginAdmin, SignUpAdmin } from '@typings/admin';
+import ModalComponent from '@components/ModalComponent/index';
+import { ROOTSTATE } from '../../reducers/index';
+import Basic from '@layouts/Basic';
 
 const layout = {
   labelCol: { span: 8 },
@@ -15,42 +18,49 @@ const tailLayout = {
 };
 
 const Login = () => {
+  const [form]: [FormInstance<LoginAdmin>] = Form.useForm();
+  const [visible, setVisible] = useState(false);
+  const [changeSubmitVaild, setChangeSubmitVaild] = useState(false);
+  const [changeModalVaild, setChangeModalVaild] = useState(false);
+  const { message: AsyncMessage, adminsInfo } = useSelector((state: ROOTSTATE) => state.admin);
   const dispatch = useDispatch();
-  const [form] = Form.useForm();
+
   const onFinish = () => {
-    dispatch(loginAdminActions.ACTION.REQUEST(form.getFieldValue()));
+    setChangeSubmitVaild(true);
+    dispatch(loginAdminActions.ACTION.REQUEST(form.getFieldsValue()));
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+  useEffect(() => {
+    if (!visible) setChangeModalVaild(false);
+    console.log(adminsInfo.user);
 
-  const onClickSignup = useCallback(() => {
-    dispatch(
-      signupAdmin_action.ACTION.REQUEST({
-        name: '123',
-        email: 'dna;s0@maver.com',
-        M_days: [1, 2],
-        password: '123',
-        group: 12,
-      }),
-    );
-  }, []);
+    if (AsyncMessage && !visible && changeModalVaild) {
+      message.success(AsyncMessage);
+      dispatch(retryAdminSignUpAction());
+      setChangeModalVaild(false);
+    }
+    if (!adminsInfo.user && AsyncMessage.trim() !== '' && changeSubmitVaild) {
+      message.warn(AsyncMessage);
+      dispatch(retryAdminSignUpAction());
+      setChangeSubmitVaild(false);
+    }
+  }, [visible, adminsInfo, AsyncMessage, changeModalVaild, changeSubmitVaild]);
+  const showModal = useCallback(() => {
+    setVisible(true);
+    setChangeModalVaild(true);
+  }, [visible]);
 
-  const onClickLogin = useCallback(() => {
-    console.log();
-
-    // dispatch()
-  }, []);
-
+  if (adminsInfo.user) {
+    console.log('Redirect');
+    <Redirect from="/login" to="/admin/main" />;
+  }
   return (
     <Row justify="center" align="middle" style={{ minHeight: '80vh' }}>
       <Col xs={{ span: 11, offset: 1 }} lg={{ span: 8, offset: 2 }}>
-        <Form name="basic" form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+        <Form name="basic" form={form} onFinish={onFinish}>
           <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your username!' }]}>
             <Input />
           </Form.Item>
-
           <Form.Item
             label="Password"
             name="password"
@@ -59,16 +69,16 @@ const Login = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
           <Form.Item {...tailLayout}>
-            <Button type="primary" onClick={onClickSignup}>
-              test
+            <Button type="primary" style={{ marginRight: '20px' }} onClick={showModal}>
+              회원가입
             </Button>
+            <ModalComponent visible={visible} modalFunc={setVisible} />
             <Button type="primary" htmlType="submit">
-              Submit
+              로그인
+            </Button>
+            <Button type="primary">
+              <Link to="/admin/main">홈</Link>
             </Button>
           </Form.Item>
         </Form>

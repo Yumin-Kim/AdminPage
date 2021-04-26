@@ -13,11 +13,8 @@ import TopNav from '@layouts/TopNav';
 import SiderBar from '@layouts/SiderBar/index';
 const { Header, Footer, Content, Sider } = Layout;
 const { SubMenu } = Menu;
-interface Basic {
-  route: RouteConfig;
-}
 
-const Basic: React.FC<Basic> = () => {
+const Basic: React.VFC<any> = () => {
   let { pathname } = useLocation();
   console.log(location);
 

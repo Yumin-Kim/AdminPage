@@ -1,5 +1,9 @@
 import { AxiosError } from 'axios';
-import { AdminStore } from '@typings/admin';
+import { AdminStore, LoginAdmin, T_AdminInfo } from '@typings/admin';
+import axios from 'axios';
+import { SIGNUP } from '@actions/admin/type';
+import { takeLatest, put, call, ForkEffect } from 'redux-saga/effects';
+import { LOGIN } from '../actions/admin/type';
 
 export type ApiEndPoint<R, P extends any[]> = (...p: P) => Promise<R>;
 export interface IEntity<R, S, F> {
@@ -41,7 +45,43 @@ export interface IEntityAction {
     FAILURE: (...p: any[]) => any;
     [key: string]: (...p: any[]) => any;
   };
-  API: ApiEndPoint<any, any>;
+  API: ApiEndPoint<any, any> & APITYPE<any, any>;
 }
 
 export type EntityAction<T extends IEntityAction> = ReturnType<T['ACTION'][keyof T['ACTION']]>;
+
+///////////////////
+//CUSTOM
+///////////////////
+type APITYPE<PARAM, DATA> = (params: PARAM) => Promise<DATA>;
+
+export const createActionFactory = <R, S, F, PARAM, DATA>(actionType: IEntity<R, S, F>, API: APITYPE<PARAM, DATA>) => ({
+  ACTION: {
+    REQUEST: (requestData: PARAM) => ({ type: actionType.REQUEST, payload: requestData }),
+    SUCCESS: (data: DATA) => ({ type: actionType.SUCCESS, payload: data }),
+    FAILURE: (data: any) => ({ type: actionType.FAILURE, payload: data }),
+  },
+  API,
+});
+// export const testAPI = async (params: LoginAdmin) => (await axios.post<T_AdminInfo>('/admin', params)).data;
+
+// export const testActions = createActionFactory(LOGIN, testAPI);
+
+// export type TESTACTION = EntityAction<typeof testActions>;
+
+export function* SagaProcesingAcion<R, S, F, PARAM, DATA, T extends IEntityAction>(
+  actionType: IEntity<R, S, F>,
+  api: APITYPE<PARAM, DATA>,
+  actionFunc: EntityAction<T>,
+): Generator<ForkEffect<never>, void, unknown> {
+  yield takeLatest(typeof actionType.REQUEST, SagaworkerFunc);
+
+  function* SagaworkerFunc(actions: EntityAction<T>) {
+    try {
+      const data: DATA = yield call(api, actions.payload);
+      yield put(actionFunc.ACTION.SUCCESS(data));
+    } catch (error) {
+      yield put(actionFunc.ACTION.FAILURE(error));
+    }
+  }
+}
