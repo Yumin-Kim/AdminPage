@@ -1,13 +1,13 @@
 import path from 'path';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import webpack from 'webpack';
-// import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 console.log(isDevelopment);
 const config: webpack.Configuration = {
-  name: 'sleact',
+  name: 'adminPage',
   mode: isDevelopment ? 'development' : 'production',
   devtool: isDevelopment ? 'hidden-source-map' : 'eval',
   resolve: {
@@ -62,23 +62,25 @@ const config: webpack.Configuration = {
     ],
   },
   plugins: [
-    // new ForkTsCheckerWebpackPlugin({
-    //   async: false,
-    //   // eslint: {
-    //   //   files: "./src/**/*",
-    //   // },
-    // }),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+      // eslint: {
+      //   files: "./src/**/*",
+      // },
+    }),
     new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? 'development' : 'production' }),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: '/',
+    chunkFilename: '[name].chunk.js',
+    publicPath: '/dist/',
   },
   devServer: {
     historyApiFallback: true, // react router
     port: 3090,
     publicPath: '/dist/',
+    hot: true,
     // proxy: {
     //   '/api/': {
     //     target: 'http://localhost:3000',

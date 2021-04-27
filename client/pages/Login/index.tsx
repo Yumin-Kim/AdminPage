@@ -1,13 +1,12 @@
 import { Form, Input, Button, Modal, Row, Col, FormInstance, message } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useState } from 'react';
 import { loginAdminActions, signupAdmin_action, SignUpActions, retryAdminSignUpAction } from '@actions/admin/admin';
-import { LoginAdmin, SignUpAdmin } from '@typings/admin';
+import { LoginAdmin } from '@typings/admin';
 import ModalComponent from '@components/ModalComponent/index';
 import { ROOTSTATE } from '../../reducers/index';
-import Basic from '@layouts/Basic';
 
 const layout = {
   labelCol: { span: 8 },
@@ -23,16 +22,20 @@ const Login = () => {
   const [changeSubmitVaild, setChangeSubmitVaild] = useState(false);
   const [changeModalVaild, setChangeModalVaild] = useState(false);
   const { message: AsyncMessage, adminsInfo } = useSelector((state: ROOTSTATE) => state.admin);
+  const here = useRef<string>('');
+
   const dispatch = useDispatch();
 
   const onFinish = () => {
+    here.current = 'Helo!!!!!!!!!!';
     setChangeSubmitVaild(true);
     dispatch(loginAdminActions.ACTION.REQUEST(form.getFieldsValue()));
   };
 
   useEffect(() => {
+    console.log('useEffect Loginn');
+
     if (!visible) setChangeModalVaild(false);
-    console.log(adminsInfo.user);
 
     if (AsyncMessage && !visible && changeModalVaild) {
       message.success(AsyncMessage);
@@ -45,14 +48,14 @@ const Login = () => {
       setChangeSubmitVaild(false);
     }
   }, [visible, adminsInfo, AsyncMessage, changeModalVaild, changeSubmitVaild]);
+
   const showModal = useCallback(() => {
     setVisible(true);
     setChangeModalVaild(true);
   }, [visible]);
 
   if (adminsInfo.user) {
-    console.log('Redirect');
-    <Redirect from="/login" to="/admin/main" />;
+    return <Redirect to="/admin/main" />;
   }
   return (
     <Row justify="center" align="middle" style={{ minHeight: '80vh' }}>
@@ -68,7 +71,6 @@ const Login = () => {
           >
             <Input.Password />
           </Form.Item>
-
           <Form.Item {...tailLayout}>
             <Button type="primary" style={{ marginRight: '20px' }} onClick={showModal}>
               회원가입
@@ -76,9 +78,6 @@ const Login = () => {
             <ModalComponent visible={visible} modalFunc={setVisible} />
             <Button type="primary" htmlType="submit">
               로그인
-            </Button>
-            <Button type="primary">
-              <Link to="/admin/main">홈</Link>
             </Button>
           </Form.Item>
         </Form>

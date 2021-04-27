@@ -44,7 +44,7 @@ const Home: FC<any> = () => {
         <Bar data={data} width={100} height={50} options={options} />
       </Col>
       <Col xs={24} md={12} xl={6} span={6}>
-        즐겨 찾기 구현
+        즐겨 찾기 구현!
         <br />
         <BestCategory />
       </Col>
