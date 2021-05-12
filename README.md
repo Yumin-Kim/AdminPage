@@ -36,8 +36,12 @@
         2. 프론트 기능명세서 작성 및 return 타입 정의 >> 향후 Redux 활용에 편리
         3. 간단한 디자인 진행
         4. 프론트 개발 시작 
-
-    
+2. 2021 04 28
+   * 현재 리액트에 익숙해지기 위해서 토이 프로젝트 진행
+   * useEffect , useCallback , useContextAPI , useReducer로만 개발 
+   * 상태 관리 라이브러리는 최대한 사용하지 않고 진행중
+   * 리액트 라이프 사이클 또한 이해하며 진행중
+   * 최근 JavaScript로 개발한 경험이 적어 사용하는 메소드만 사용중이지만 이런 부분도 수정 필요
 
 ### 개발에 있어 필요한 자료
 * <a href="https://medium.com/crocusenergy/nestjs-typeorm-%EA%B8%B0%EB%B3%B8-crud-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-69b9640dc826">NestJS , TypeORM관련 포스팅</a>이며 기초 잘설명되어 있다.
