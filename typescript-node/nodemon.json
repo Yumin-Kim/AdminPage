@@ -1,7 +1,0 @@
-{
-  "watch": [
-    "./test-nodeTypeScript/**/*.ts"
-  ],
-  "ext": "ts,json",
-  "exec": "npx ts-node ./test-nodeTypeScript/index.ts"
-}

@@ -1,0 +1,242 @@
+/* 상단 섹션 그룹 */
+.mainTopGroup{
+	background-color: #e3f0fe;
+	position: relative;
+}
+.mainTopGroup .col{
+	float: left;
+	/*height: 500px;*/
+}
+.mainTopGroup .col.c1{
+	width: 450px;
+	background-color: #f00;
+	margin-right: 50px;
+}
+.mainTopGroup .col.c2{
+	width: calc(100% - 1270px);
+	background-color: #ff0;
+}
+.mainTopGroup .col.c3{
+	width: 430px;
+	margin-left: 50px;
+	background-color: #0f0;
+}
+.mainTopGroup .col.c4{
+	width: 240px;
+	background-color: #f0f;
+	margin-left: 50px;
+}
+.mainTopGroup .btn_infoBox{
+	display: none;
+	width: 1em; /* content 크기*/
+	box-sizing: content-box;
+	padding: 10px 20px;
+	background-color: #0c4a96;
+	color: #fff;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -62px;
+	z-index: 1;
+}
+.mainTopGroup .btn_infoBox.open{
+	right: 240px;
+}
+.mainTopGroup .btn_infoBox::after{
+	content: 'add';
+	width: 35px;
+	height: 35px;
+	padding-top: 4px;
+	display: block;
+	background-color: #0c4a96;
+	border-radius: 50%;
+	font-family: 'Material Icons';
+	font-size: 1.5em;
+	position: absolute;
+	left: -17.5px;
+	top: 50%;
+	margin-top: -17.5px;
+}
+.mainTopGroup .btn_infoBox.open::after{
+	content: 'close';
+}
+.banner1 .swiper-slide{
+	text-align: center;
+}
+.slideBottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 2;
+}
+.slideBottom .optGroup{
+	display: inline-block;
+	background-color: rgba(0,0,0,.8);
+	padding:5px 20px;
+	border-radius: 50px;
+}
+.slideBottom .optGroup>*{
+	position: static;
+	float: left;
+}
+.slideBottom .optGroup .swiper-pagination{
+	width: auto;
+	color: #fff;
+	margin-right: 20px;
+}
+.slideBottom .optGroup .swiper-button-next:after, 
+.slideBottom .optGroup .swiper-button-prev:after{
+	content: 'arrow_back';
+	font-family: 'Material Icons';
+	font-size: 20px;
+	color: #fff;
+}
+.slideBottom .optGroup .swiper-button-next:after{
+	content: 'arrow_forward';
+}
+.slideBottom .optGroup .swiper-button-next, 
+.slideBottom .optGroup .swiper-button-prev{
+	height: auto;
+	margin-top: 0;
+}
+.tabBoard{
+	position: relative;
+	height: 280px;
+	padding: 20px;
+	background-color: #fff;
+}
+.tabBoard .tab::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.tabBoard .tab .tabLink{
+	display: block;
+	padding: 10px 20px;
+}
+.tabBoard .tab{
+	border-bottom: solid 1px #dcdcdc;
+}
+.tabBoard .tab>li{
+	float: left;
+}
+.tabBoard .active .tabLink{
+	border-bottom: solid 3px #0f0;
+}
+.tabBoard .panel,
+.tabBoard .moreBtn{
+	display: none;
+}
+.tabBoard .active .panel,
+.tabBoard .active .moreBtn{
+	display: block;
+}
+.tabBoard .panel{
+	position: absolute;
+	left: 20px;
+	top: 80px;
+}
+.tabBoard .moreBtn{
+	position: absolute;
+	right: 20px;
+	top: 10px;
+}
+
+
+/* 소식 */
+.tabNews .container{
+	position: relative;
+	height: 280px;
+	padding: 20px;
+}
+.tabNews .tab::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.tabNews .tab .tabLink{
+	display: block;
+	padding: 10px 20px;
+}
+.tabNews .tab{
+	border-bottom: solid 1px #dcdcdc;
+}
+.tabNews .tab>li{
+	float: left;
+}
+.tabNews .active .tabLink{
+	border-bottom: solid 3px #0f0;
+}
+.tabNews .panel li{
+	float: left;
+	width: 25%;
+	border:solid 1px #dcdcdc;
+}
+.tabNews .panel,
+.tabNews .moreBtn{
+	display: none;
+}
+.tabNews .active .panel,
+.tabNews .active .moreBtn{
+	display: block;
+}
+.tabNews .panel{
+	position: absolute;
+	left: 0px;
+	top: 80px;
+	width: 100%;
+}
+.tabNews .moreBtn{
+	position: absolute;
+	right: 20px;
+	top: 10px;
+}
+@media screen and (max-width: 1970px){
+	.mainTopGroup .btn_infoBox{
+		display: block;
+		transition: all .5s ease 0s;
+	}
+	.mainTopGroup .col.c4{
+		/*display: none;*/
+		position: fixed;
+		width: 240px;
+		height: 100%;
+		background: #c1dcf9;
+		right: -240px;
+		top: 0;
+		z-index: 2;
+		transition: all .5s ease 0s;
+	}
+	.mainTopGroup .col.c4.show{
+		right: 0px;
+	}
+	.mainTopGroup .col.c2{
+		width: calc(100% - 980px);
+	}
+}
+@media screen and (max-width: 1470px){
+	.mainTopGroup .col.c1{
+		width: calc(50% - 20px);
+		margin-right: 20px;
+	}
+	.mainTopGroup .col.c2{
+		width: 50%;
+	}
+	.mainTopGroup .col.c3{
+		width: 100%;
+		margin-left: 0;
+		margin-top: 20px;
+	}
+}
+
+@media screen and (max-width: 1080px){
+	.mainTopGroup .col.c1,
+	.mainTopGroup .col.c2{
+		width: 100%;
+	}
+	.mainTopGroup .btn_infoBox{
+		top: 100px;
+	}
+}

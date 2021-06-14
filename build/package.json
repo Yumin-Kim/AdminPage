@@ -1,0 +1,32 @@
+{
+  "name": "build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compile.js",
+  "dependencies": {
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "cheerio": "^1.0.0-rc.10",
+    "css-hot-loader": "^1.4.4",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.6.0",
+    "scrollmagic": "^2.0.8",
+    "style-loader": "^2.0.0",
+    "swiper": "^6.7.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "csv-stringify": "^5.6.2",
+    "nodemon": "^2.0.7",
+    "puppeteer": "^10.0.0",
+    "stringify": "^5.2.0"
+  },
+  "scripts": {
+    "build": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC"
+}
