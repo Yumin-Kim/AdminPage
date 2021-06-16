@@ -11,6 +11,7 @@ import { PricingModule } from './pricing/pricing.module';
 import { UsercarModule } from './usercar/usercar.module';
 
 import { AuthModule } from './auth/auth.module';
+import { UsedcarModule } from './usedcar/usedcar.module';
 
 @Module({
   imports: [
@@ -24,7 +25,10 @@ import { AuthModule } from './auth/auth.module';
       entities: [__dirname + './**/**/*/entitiy{.ts}'],
       autoLoadEntities: true,
       synchronize: true,
-      charset: 'utf8mb4',
+      charset: 'utf8mb4_unicode_ci',
+      // extra: {
+      //   ' charset ': ' utf8mb4_unicode_ci ',
+      // },
     }),
     AuthModule,
     UserModule,
@@ -34,6 +38,7 @@ import { AuthModule } from './auth/auth.module';
     FacilityModule,
     UsercarModule,
     PricingModule,
+    UsedcarModule,
   ],
   controllers: [AppController],
   providers: [AppService],
