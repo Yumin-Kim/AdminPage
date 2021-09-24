@@ -331,7 +331,6 @@ export class AdminService {
       object['length'] = member.length;
       pushData.push(object);
     });
-x
     return pushData;
   }
 

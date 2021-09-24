@@ -17,18 +17,15 @@ import { UsedcarModule } from './usedcar/usedcar.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '172.17.0.1',
       port: 3306,
       username: 'root',
-      password: 'wjqrmsrma!wl6311',
-      database: 'test',
+      password: 'nodejs',
+      database: 'schooladmindatabase',
       entities: [__dirname + './**/**/*/entitiy{.ts}'],
       autoLoadEntities: true,
       synchronize: true,
       charset: 'utf8mb4_unicode_ci',
-      // extra: {
-      //   ' charset ': ' utf8mb4_unicode_ci ',
-      // },
     }),
     AuthModule,
     UserModule,
