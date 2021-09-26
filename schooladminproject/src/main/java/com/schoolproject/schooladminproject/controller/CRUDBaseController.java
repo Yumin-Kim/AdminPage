@@ -1,5 +1,6 @@
 package com.schoolproject.schooladminproject.controller;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,14 +10,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 public interface CRUDBaseController {
 
     @PostMapping
-    public String createEntity();
+    Object  createEntity();
 
     @GetMapping
-    public String getEntity(Model model);
+    Object getEntity(Model model, Pageable pageable);
 
     @PutMapping
-    public String updateEntity();
+    Object  updateEntity();
 
     @DeleteMapping
-    public String deleteEntity();
+    Object  deleteEntity();
 }

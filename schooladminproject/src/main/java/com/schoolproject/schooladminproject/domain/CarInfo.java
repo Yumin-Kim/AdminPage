@@ -3,7 +3,7 @@ package com.schoolproject.schooladminproject.domain;
 import com.schoolproject.schooladminproject.domain.common.BaseDateEntity;
 import com.schoolproject.schooladminproject.domain.enumtype.CarFuelType;
 import com.schoolproject.schooladminproject.domain.enumtype.CarTransmissionKind;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Getter
+@Setter(AccessLevel.PACKAGE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarInfo extends BaseDateEntity {
     private Integer modelYear;
     private Integer distance;
@@ -23,11 +26,14 @@ public class CarInfo extends BaseDateEntity {
     private String color;
     @Enumerated(EnumType.STRING)
     private CarTransmissionKind carTransmissionKind;
-@Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String modelOption;
     private Integer passengers;
     @Column(columnDefinition = "LONGTEXT")
     private String imageSrc;
+
+
+
 
 }
 

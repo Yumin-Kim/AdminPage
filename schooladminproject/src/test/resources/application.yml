@@ -1,15 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/school;
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
+    url: jdbc:mysql://localhost:3306/schooladmin?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       show-sql: true
+      default_batch_fetch_size: 500
     properties:
       hibernate.format_sql: true
 
@@ -17,4 +18,3 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
-
