@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<ul
+        th:fragment="fragment-sider"
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+>
+    <!-- Sidebar - Brand -->
+    <a
+            class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="/"
+    >
+        <!-- <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div> -->
+        <div class="sidebar-brand-text mx-3">KB 차차차</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0" />
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Main 페이지</span></a
+        >
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider" />
+
+    <!-- Heading -->
+    <div class="sidebar-heading">Interface</div>
+
+    <!-- Nav Item - 회원 관리-->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>회원 관리</span>
+        </a>
+        <div
+                id="collapseTwo"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/member">회원 목록</a>
+                <a class="collapse-item" href="./404.html">접속자 집계</a>
+                <a class="collapse-item" href="./404.html">접속자 검색</a>
+                <a class="collapse-item" href="./404.html">메세지 보내기</a>
+                <a class="collapse-item" href="./404.html">메일 발송 및 설정</a>
+                <a class="collapse-item" href="./404.html">SMS 발송 및 설정</a>
+                <a class="collapse-item" href="./404.html"
+                >회원 보안 프로그램 관리</a
+                >
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item - 보유 차량 관리-->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo1"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>보유 차량 관리</span>
+        </a>
+        <div
+                id="collapseTwo1"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/company">차량 등록</a>
+                <a class="collapse-item" href="./404.html">매물 관리</a>
+                <a class="collapse-item" href="./404.html">분류 관리</a>
+                <a class="collapse-item" href="./404.html">메인 진열 차량 관리</a>
+                <a class="collapse-item" href="./404.html">삭제 상품 목록 정리</a>
+                <a class="collapse-item" href="./404.html">이용 후기</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - 거래 기타 현황 -->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo2"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>거래 / 기타 현황</span>
+        </a>
+        <div
+                id="collapseTwo2"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">팔아줘 관리</h6>
+                <a class="collapse-item" href="buttons.html">거래 차량 등록</a>
+                <a class="collapse-item" href="./404.html">경매 현황</a>
+                <a class="collapse-item" href="./404.html">견적 / 명세서 현황</a>
+                <a class="collapse-item" href="./404.html">이용 후기 현황</a>
+            </div>
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">직거래 관리</h6>
+                <a class="collapse-item" href="buttons.html">거래 차량 등록</a>
+                <a class="collapse-item" href="./404.html">문의 사항 관리</a>
+                <a class="collapse-item" href="./404.html">광고 현황</a>
+                <a class="collapse-item" href="./404.html">이용 후기 현황</a>
+            </div>
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">바꿔줘 관리</h6>
+                <a class="collapse-item" href="buttons.html">거래 차량 등록</a>
+                <a class="collapse-item" href="./404.html">요청 관리</a>
+                <a class="collapse-item" href="./404.html">이용 후기 관리</a>
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item - 시세 관리-->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo3"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>시세 관리 </span>
+        </a>
+        <div
+                id="collapseTwo3"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="buttons.html">차량 등록</a>
+                <a class="collapse-item" href="./404.html">시세 정보 관리</a>
+                <a class="collapse-item" href="./404.html"
+                >회원 별 차량 시세 관리</a
+                >
+            </div>
+        </div>
+    </li>
+    <!-- Nav Item - 기타 관리-->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo5"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>기타 관리</span>
+        </a>
+        <div
+                id="collapseTwo5"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="buttons.html"
+                >이벤트 현황 및 정보 관리</a
+                >
+                <a class="collapse-item" href="./404.html">당첨자 관리</a>
+                <a class="collapse-item" href="./404.html">멤버십 관리</a>
+                <a class="collapse-item" href="./404.html">KB 코인 관리</a>
+                <a class="collapse-item" href="./404.html">질문 관리</a>
+                <a class="collapse-item" href="./404.html">제안 / 문의 관리</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - 딜러 회원 관리-->
+    <li class="nav-item">
+        <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#collapseTwo6"
+                aria-expanded="true"
+                aria-controls="collapseTwo"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>딜러 회원 관리</span>
+        </a>
+        <div
+                id="collapseTwo6"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="buttons.html">딜러 회원 관리</a>
+                <a class="collapse-item" href="./404.html">달러 회원 관리</a>
+                <a class="collapse-item" href="./404.html"
+                >딜러 회원별 고객 후기 관리</a
+                >
+                <a class="collapse-item" href="./404.html"
+                >달로 회원별 소개글 관리</a
+                >
+                <a class="collapse-item" href="./404.html"
+                >딜러 회원 판매 차량 관리</a
+                >
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block" />
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+</ul>
+</body>
+</html>

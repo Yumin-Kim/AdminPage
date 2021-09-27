@@ -22,12 +22,11 @@ import static org.springframework.util.StringUtils.hasText;
 //보유 현황 관련 controller 회사에서 보유하고 있는 차량의 정보 만을 수정할 수 있다.
 @RestController
 @Transactional
-@RequestMapping("/company")
+@RequestMapping("/company/api")
 @RequiredArgsConstructor
 public class CompanyCarController {
     private final AdminRepository adminRepository;
     private final CompanyCarRepository companyCarRepository;
-
     //차량 등록 기능
     @PostMapping
     public String createCompanyCar(@RequestBody CompanyCarCreateDto companyCarCreateDto) {

@@ -44,6 +44,17 @@ class MemberRepositoryTest {
 
     @Test
     @DisplayName("")
+    void MemberRepositoryTest_2() throws Exception{
+        // given
+        final List<Member> allEntity = memberRepository.findAllEntity();
+        final int size = allEntity.size();
+        // when
+        System.out.println("size = " + size);
+        // then
+    }
+
+    @Test
+    @DisplayName("")
     void MemberRepositoryTest() throws Exception {
         PageRequest of = PageRequest.of(0, 1);
         memberRepository.findByIdIn(List.of(1L, 2L));

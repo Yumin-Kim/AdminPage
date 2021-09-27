@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.List;
+
 import static com.schoolproject.schooladminproject.domain.QBusinessUsedCar.businessUsedCar;
 import static com.schoolproject.schooladminproject.domain.QMember.member;
 import static org.springframework.util.StringUtils.hasText;
@@ -37,6 +39,15 @@ public class MemberSearchRepositoryImpl implements MemberSearchRepository {
                 .fetchResults();
 
         return new PageImpl<>(memberQueryResults.getResults(), pageable, memberQueryResults.getTotal());
+    }
+
+    @Override
+    public List<Member> searchV2EqualConditionNotPaging(MemberSearchCondDto memberSearchCondDto) {
+        List<Member> fetch = jpaQueryFactory.selectFrom(member)
+                .leftJoin(member.businessUsedCar, businessUsedCar).fetchJoin()
+                .where(searchConfEqaulMember(memberSearchCondDto))
+                .fetch();
+        return fetch;
     }
 
     private BooleanBuilder searchConfEqaulMember(MemberSearchCondDto memberSearchCondDto) {
@@ -80,20 +91,30 @@ public class MemberSearchRepositoryImpl implements MemberSearchRepository {
         if (hasText(memberSearchCondDto.getModelName())) {
             booleanBuilder.and(businessUsedCar.name.like(memberSearchCondDto.getModelName() + '%'));
         }
-        if (memberSearchCondDto.getCreatedAt() != null) {
-            booleanBuilder.and(member.createdAt.goe(memberSearchCondDto.getCreatedAt()));
+        if (memberSearchCondDto.getCreatedAt() != null && memberSearchCondDto.getLastCreatedAt() != null) {
+            booleanBuilder.and(member.createdAt.between(memberSearchCondDto.getCreatedAt(),memberSearchCondDto.getLastCreatedAt()));
         }
-        if (memberSearchCondDto.getLastCreatedAt() != null) {
-            booleanBuilder.and(member.createdAt.loe(memberSearchCondDto.getLastCreatedAt()));
-        }
+//        if (memberSearchCondDto.getCreatedAt() != null || memberSearchCondDto.getLastCreatedAt() != null) {
+//            if (memberSearchCondDto.getCreatedAt() != null) {
+//                booleanBuilder.and(member.createdAt.goe(memberSearchCondDto.getCreatedAt()));
+//            }
+//            if (memberSearchCondDto.getLastCreatedAt() != null) {
+//                booleanBuilder.and(member.createdAt.loe(memberSearchCondDto.getLastCreatedAt()));
+//            }
+//        }
         if (memberSearchCondDto.getMemberPremiumClass() != null) {
             booleanBuilder.and(member.memberPremiumClass.eq(memberSearchCondDto.getMemberPremiumClass()));
         }
-        if (memberSearchCondDto.getGreaterEqualPoint() != null) {
-            booleanBuilder.and(member.point.goe(memberSearchCondDto.getGreaterEqualPoint()));
+        if (memberSearchCondDto.getGreaterEqualPoint() != null && memberSearchCondDto.getLessEqualPoint() != null) {
+            booleanBuilder.and(member.point.between(memberSearchCondDto.getGreaterEqualPoint(),memberSearchCondDto.getLessEqualPoint()));
         }
-        if (memberSearchCondDto.getLessEqualPoint() != null) {
-            booleanBuilder.and(member.point.loe(memberSearchCondDto.getLessEqualPoint()));
+        if (memberSearchCondDto.getGreaterEqualPoint() != null || memberSearchCondDto.getLessEqualPoint() != null) {
+            if (memberSearchCondDto.getGreaterEqualPoint() != null) {
+                booleanBuilder.and(member.point.goe(memberSearchCondDto.getGreaterEqualPoint()));
+            }
+            if (memberSearchCondDto.getLessEqualPoint() != null) {
+                booleanBuilder.and(member.point.loe(memberSearchCondDto.getLessEqualPoint()));
+            }
         }
         return booleanBuilder;
     }

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>SB Admin 2 - Buttons</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+            href="vendor/fontawesome-free/css/all.min.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"
+    />
+
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    ></script>
+
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"
+    ></script>
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"
+    ></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+    <style>
+    </style>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <div th:replace="layout/sidebar.html :: fragment-sider" ></div>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <div th:replace="layout/navigation.html :: fragment-navigation"></div>
+
+            <div class="container-fluid">
+                <h1 class="h3 mb-4 text-gray-800">회원목록
+                </h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <form id="formBox">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label"
+                                        >실명</label
+                                        >
+                                        <div class="col-sm-3">
+                                            <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="input1"
+                                                    placeholder="실명"
+                                                    name="name"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="input2"
+                                                class="col-sm-2 col-form-label"
+                                        >아이디</label
+                                        >
+                                        <div class="col-sm-3">
+                                            <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="input2"
+                                                    name="username"
+                                                    placeholder="아이디"
+                                            />
+                                        </div>
+                                        <!-- <div class="form-check col-sm-1">
+                                            <input type="hidden" name="checkbox2" value="no">
+                                            <input type="checkbox" name="checkbox2" id="checkbox2" value="yes" />
+                                            <label class="form-check-label" for="checkbox2">
+                                                영문순
+                                            </label>
+                                        </div> -->
+                                        <!-- <div class="form-check col-sm-1">
+                                            <input type="hidden" name="checkbox3" value="no">
+                                            <input type="checkbox" name="checkbox3" id="checkbox3" value="yes" />
+                                            <label class="form-check-label" for="checkbox3">
+                                                국문순
+                                            </label>
+                                        </div> -->
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >소득 등급</label
+                                        >
+                                        <div class="form-check col-sm-1">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="memberPremiumClass"
+                                                    value="BASIC"
+                                            />
+                                            <label class="form-check-label" for="memberPremiumClass">
+                                                기본 등급
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-sm-1">
+                                            <input type="radio" name="memberPremiumClass" value="SLIVER"/>
+                                            <label class="form-check-label" for="memberPremiumClass" value="SLIVER">
+                                                실버 등급
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-sm-1">
+                                            <input type="radio" name="memberPremiumClass" id="checkList3" value="GOLD"/>
+                                            <label class="form-check-label" for="memberPremiumClass" value="GOLD">
+                                                골드 등급
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-sm-2">
+                                            <input type="radio" name="memberPremiumClass" id="memberPremiumClass"
+                                                   value="PLATINUM"/>
+                                            <label class="form-check-label" for="memberPremiumClass">
+                                                플레티넘 등급
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >포인트</label
+                                        >
+                                        <!-- <div class="form-group col-sm-5">
+                                            <input
+                                                    type="range"
+                                                    class="form-control-range"
+                                                    id="formControlRange"
+                                            />
+                                        </div> -->
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        id="greaterEqualPoint"
+                                                        placeholder="0"
+                                                        name="greaterEqualPoint"
+                                                />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input
+                                                        type="number"
+                                                        class="form-control"
+                                                        id="lessEqualPoint"
+                                                        placeholder="10000"
+                                                        name="lessEqualPoint"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >등록 차량</label
+                                        >
+                                        <div class="form-check col-sm-1">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="checkbox_car_1"
+                                                    name="isCared"
+                                            />
+                                            <label
+                                                    class="form-check-label"
+                                                    for="gridCheck_carInfo"
+                                            >
+                                                등록 유무
+                                            </label>
+                                        </div>
+                                        <!-- <div class="form-group col-md-2">
+                                            <select id="inputState" class="form-control">
+                                                <option selected>차량 종류</option>
+                                                <option>...</option>
+                                            </select>
+                                        </div>
+                                        <label
+                                                for="inputcarName"
+                                                class="col-sm-1 col-form-label"
+                                        >차량 이름 검색</label
+                                        >
+                                        <div class="col-sm-2">
+                                            <input
+                                                    type="password"
+                                                    class="form-control"
+                                                    id="inputcarName"
+                                                    placeholder="차량 이름 검색"
+                                            />
+                                        </div>
+                                        <label
+                                                for="inputcarName"
+                                                class="col-sm-1 col-form-label"
+                                        >차량 이름 검색</label
+                                        >
+                                        <div class="col-sm-2">
+                                            <input
+                                                    type="password"
+                                                    class="form-control"
+                                                    id="inputcarName"
+                                                    placeholder="차량 이름 검색"
+                                            />
+                                        </div> -->
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >소개글</label
+                                        >
+                                        <div class="form-check col-sm-1">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="checkbox_car_1"
+                                                    name="isDescription"
+                                            />
+                                            <label
+                                                    class="form-check-label"
+                                                    for="gridCheck_carInfo"
+                                            >
+                                                등록 유무
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >추천인</label
+                                        >
+                                        <div class="form-check col-sm-1">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                    id="checkbox_person_1"
+                                                    name="isRecommendMember"
+                                            />
+                                            <label
+                                                    class="form-check-label"
+                                                    for="checkbox_person_1"
+                                            >
+                                                등록 유무
+                                            </label>
+                                        </div>
+                                        <label
+                                                for="checkbox_recommed_1"
+                                                class="col-sm-1 col-form-label"
+                                        >추천인 검색</label
+                                        >
+                                        <div class="col-sm-2">
+                                            <input
+                                                    name="recommendName"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="checkbox_recommed_1"
+                                                    placeholder="추천인 검색"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label
+                                                for="inputPassword3"
+                                                class="col-sm-2 col-form-label"
+                                        >등록 일자</label
+                                        >
+                                        <div class="col-md-3 col-xs-4">
+                                            <div class="form-group">
+                                                <div
+                                                        class="input-group date"
+                                                        id="datetimepicker1"
+                                                        data-target-input="nearest"
+                                                >
+                                                    <input
+                                                            type="text"
+                                                            class="form-control datetimepicker-input"
+                                                            data-target="#datetimepicker1"
+                                                            value="01/10/2021"
+                                                            id="datetimpepicker_first"
+                                                            name="createdAt"
+                                                    />
+                                                    <div
+                                                            class="input-group-append"
+                                                            data-target="#datetimepicker1"
+                                                            data-toggle="datetimepicker"
+                                                    >
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-xs-4">
+                                            <div class="form-group">
+                                                <div
+                                                        class="input-group date"
+                                                        id="datetimepicker2"
+                                                        data-target-input="nearest"
+                                                >
+                                                    <input
+                                                            type="text"
+                                                            class="form-control datetimepicker-input"
+                                                            data-target="#datetimepicker2"
+                                                            value="09/10/2021"
+                                                            id="datetimpepicker_last"
+                                                            name="lastCreatedAt"
+                                                    />
+                                                    <div
+                                                            class="input-group-append"
+                                                            data-target="#datetimepicker2"
+                                                            data-toggle="datetimepicker"
+                                                    >
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary">
+                                                검색
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Brand Buttons -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        <div class="card shadow mb-4 col-xl-12 table-responsive-xl">
+            <div class="card-header py-3"></div>
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">이메일</th>
+                    <th scope="col">주소</th>
+                    <th scope="col" >설명</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">생성 날짜</th>
+                    <th scope="col">수정 날짜</th>
+                    <th scope="col">닉네임</th>
+                    <th scope="col">등록 차량 현황</th>
+                    <th scope="col">추천인</th>
+                    <th scope="col">회원 등급</th>
+                </tr>
+                </thead>
+                <tbody class="tbodyClass">
+                <tr th:each="memberInfo ,memberStat:${memberList}">
+                    <th scope="col">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input checkboxColumn"
+                                   th:id="'customCheck'+${memberInfo.id}">
+                            <label class="custom-control-label" th:for="'customCheck'+${memberInfo.id}">[[${memberInfo.id}]]</label>
+                    </th>
+                    <th scope="col">[[${memberInfo.name}]]</th>
+                    <th scope="col">[[${memberInfo.email}]]</th>
+                    <th scope="col">[[${memberInfo.address}]]</th>
+                    <th scope="col">[[${memberInfo.description}]]</th>
+                    <th scope="col">[[${memberInfo.phoneNumber}]]</th>
+                    <th scope="col">[[${memberInfo.createdAt}]]</th>
+                    <th scope="col">[[${memberInfo.modifiedAt}]]</th>
+                    <th scope="col">[[${memberInfo.username}]]</th>
+                    <th scope="col">[[${#lists.size(memberInfo.businessUsedCars)}]]</th>
+                    <th scope="col">[[${memberInfo.recommendMember}]]</th>
+                    <th scope="col">[[${memberInfo.memberPremiumClass}]]</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div
+        class="modal fade"
+        id="logoutModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button
+                        class="close"
+                        type="button"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                >
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session.
+            </div>
+            <div class="modal-footer">
+                <button
+                        class="btn btn-secondary"
+                        type="button"
+                        data-dismiss="modal"
+                >
+                    Cancel
+                </button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"
+></script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"
+></script>
+<script type="text/javascript">
+            $(document).ready(function () {
+  const datatable = $('#dtBasicExample').DataTable({
+  "columnDefs": [
+    { "width": "10%", "targets": 0 }
+  ]
+});
+  $('.dataTables_length').addClass('bs-select');
+              $(document).on("click",".checkboxColumn",function(e){
+                  const column  = e.target.id.replace(/[^0-9]/g,"")
+                  if (confirm("삭제 하시겠습니까?")) {
+                          alert(`${column} 삭제 되었습니다.`);
+                          $.ajax({
+                             url: `http://localhost:8080/member/${column}`,
+                             type: 'DELETE',
+                             data: "json",
+                             success:function(data){
+                              $(".table").empty()
+                              let html = ""
+                              data.members.forEach(element => {
+                              html =  `<tr><th scope="col">
+                                <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkboxColumn" id="customCheck${element.id}" >
+                                <label class="custom-control-label" for="customCheck${element.id}"></label>
+                                </th>
+                                <th scope="col">${element.id}</th>
+                                <th scope="col">${element.name}</th>
+                                <th scope="col">${element.address}</th>
+                                <th scope="col">${element.description}</th>
+                                <th scope="col">${element.phoneNumber}</th>
+                                <th scope="col">${element.createdAt}</th>
+                                <th scope="col">${element.modifiedAt}</th>
+                                <th scope="col">${element.username}</th>
+                                <th scope="col">${element.businessUsedCars.length}</th>
+                                <th scope="col">${element.recommendMember}</th>
+                                <th scope="col">${element.memberPremiumClass}</th>
+                                </tr>`
+                                $(".table").append(html)
+                              });
+
+                             }
+                         })
+                      }
+              })
+                console.log("#updateButton")
+               $("#formBox").on("submit",(e)=>{
+                   var form_data = new FormData(document.getElementById("formBox"));
+                    console.log("form data: ");
+                    const sortingCondition = {}
+                    for(var pair of form_data.entries())
+                    {
+
+                        if(pair[1].trim() !== ""){
+                            if(pair[0] === "createdAt" || pair[0] === "lastCreatedAt"){
+                                console.log(pair[0]);
+                                const arrDate = pair[1].split("/");
+                                let dateYear = arrDate.splice(2,1);
+                                if(dateYear[0].length > 5){
+                                    dateYear = dateYear.slice(0,4)
+                                    console.log(dateYear);
+                                }
+                                arrDate.splice(0,0,dateYear[0])
+                                pair[1] = new Date(arrDate.join("-")).toISOString()
+                            }
+                            if(pair[1] === "on") pair[1] = true
+                            sortingCondition[pair[0]] = pair[1]
+                        }
+
+                    }
+                    if(Object.keys(sortingCondition).indexOf("isCared") < 0 )
+                        sortingCondition["isCared"] = false
+                    if(Object.keys(sortingCondition).indexOf("isRecommendMember") < 0)
+                        sortingCondition["isRecommendMember"] = false
+                    if(Object.keys(sortingCondition).indexOf("isDescription") < 0)
+                        sortingCondition["isDescription"] = false
+                    $.ajax({
+                             url: `http://localhost:8080/member/search/v1`,
+                             type: 'POST',
+                             data: JSON.stringify(sortingCondition),
+                             dataType: "json",
+                            contentType:"application/json;charset=UTF-8",
+                             success:function(data){
+                                $(".table").empty()
+                                 console.log(data);
+                              let html = ""
+                              data.members.forEach(element => {
+                               html =  `<tr><th scope="col">
+                                <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input checkboxColumn" id="customCheck${element.id}" >
+                                <label class="custom-control-label" for="customCheck${element.id}"></label>
+                                </th>
+                                <th scope="col">${element.id}</th>
+                                <th scope="col">${element.name}</th>
+                                <th scope="col">${element.address}</th>
+                                <th scope="col">${element.description}</th>
+                                <th scope="col">${element.phoneNumber}</th>
+                                <th scope="col">${element.createdAt}</th>
+                                <th scope="col">${element.modifiedAt}</th>
+                                <th scope="col">${element.username}</th>
+                                <th scope="col">${element.businessUsedCars.length}</th>
+                                <th scope="col">${element.recommendMember}</th>
+                                <th scope="col">${element.memberPremiumClass}</th>
+                                </tr>`
+                                $(".table").append(html)
+                              });
+                             }
+                         })
+                e.preventDefault()
+
+               })
+            });
+
+
+
+</script>
+<script
+        type="text/javascript"
+        src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"
+></script>
+<link
+        type="stylesheet"
+        href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></link>
+</body>
+</html>

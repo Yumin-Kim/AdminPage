@@ -24,6 +24,10 @@ public interface MemberRepository extends JpaRepository<Member,Long> , MemberSea
     @EntityGraph(attributePaths = {"businessUsedCar"})
     Page<Member> findAll(Pageable pageable);
 
+//    @EntityGraph(attributePaths = {"businessUsedCar"})
+    @Query("select m from Member m left join m.businessUsedCar")
+    List<Member> findAllEntity();
+
     List<Member> findByIdIn(List<Long> memberIdLists);
 
 }

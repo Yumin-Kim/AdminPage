@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div  th:fragment="fragment-member-search" class="col-lg-12">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form id="formBox">
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"
+                    >실명</label
+                    >
+                    <div class="col-sm-3">
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="input1"
+                                placeholder="실명"
+                                name="name"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="input2"
+                            class="col-sm-2 col-form-label"
+                    >아이디</label
+                    >
+                    <div class="col-sm-3">
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="input2"
+                                name="username"
+                                placeholder="아이디"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >소득 등급</label
+                    >
+                    <div class="form-check col-sm-1">
+                        <input
+                                class="form-check-input"
+                                type="radio"
+                                name="memberPremiumClass"
+                                value="BASIC"
+                        />
+                        <label class="form-check-label" for="memberPremiumClass">
+                            기본 등급
+                        </label>
+                    </div>
+                    <div class="form-check col-sm-1">
+                        <input type="radio" name="memberPremiumClass" value="SLIVER"/>
+                        <label class="form-check-label" for="memberPremiumClass" value="SLIVER">
+                            실버 등급
+                        </label>
+                    </div>
+                    <div class="form-check col-sm-1">
+                        <input type="radio" name="memberPremiumClass" id="checkList3" value="GOLD"/>
+                        <label class="form-check-label" for="memberPremiumClass" value="GOLD">
+                            골드 등급
+                        </label>
+                    </div>
+                    <div class="form-check col-sm-2">
+                        <input type="radio" name="memberPremiumClass" id="memberPremiumClass"
+                               value="PLATINUM"/>
+                        <label class="form-check-label" for="memberPremiumClass">
+                            플레티넘 등급
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >포인트</label
+                    >
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="greaterEqualPoint"
+                                    placeholder="0"
+                                    name="greaterEqualPoint"
+                            />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="lessEqualPoint"
+                                    placeholder="10000"
+                                    name="lessEqualPoint"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >등록 차량</label
+                    >
+                    <div class="form-check col-sm-1">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkbox_car_1"
+                                name="isCared"
+                        />
+                        <label
+                                class="form-check-label"
+                                for="gridCheck_carInfo"
+                        >
+                            등록 유무
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >소개글</label
+                    >
+                    <div class="form-check col-sm-1">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkbox_car_1"
+                                name="isDescription"
+                        />
+                        <label
+                                class="form-check-label"
+                                for="gridCheck_carInfo"
+                        >
+                            등록 유무
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >추천인</label
+                    >
+                    <div class="form-check col-sm-1">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="checkbox_person_1"
+                                name="isRecommendMember"
+                        />
+                        <label
+                                class="form-check-label"
+                                for="checkbox_person_1"
+                        >
+                            등록 유무
+                        </label>
+                    </div>
+                    <label
+                            for="checkbox_recommed_1"
+                            class="col-sm-1 col-form-label"
+                    >추천인 검색</label
+                    >
+                    <div class="col-sm-2">
+                        <input
+                                name="recommendName"
+                                type="text"
+                                class="form-control"
+                                id="checkbox_recommed_1"
+                                placeholder="추천인 검색"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                            for="inputPassword3"
+                            class="col-sm-2 col-form-label"
+                    >등록 일자</label
+                    >
+                    <div class="col-md-3 col-xs-4">
+                        <div class="form-group">
+                            <div
+                                    class="input-group date"
+                                    id="datetimepicker1"
+                                    data-target-input="nearest"
+                            >
+                                <input
+                                        type="text"
+                                        class="form-control datetimepicker-input"
+                                        data-target="#datetimepicker1"
+                                        value="01/10/2021"
+                                        id="datetimpepicker_first"
+                                        name="createdAt"
+                                />
+                                <div
+                                        class="input-group-append"
+                                        data-target="#datetimepicker1"
+                                        data-toggle="datetimepicker"
+                                >
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-4">
+                        <div class="form-group">
+                            <div
+                                    class="input-group date"
+                                    id="datetimepicker2"
+                                    data-target-input="nearest"
+                            >
+                                <input
+                                        type="text"
+                                        class="form-control datetimepicker-input"
+                                        data-target="#datetimepicker2"
+                                        value="09/10/2021"
+                                        id="datetimpepicker_last"
+                                        name="lastCreatedAt"
+                                />
+                                <div
+                                        class="input-group-append"
+                                        data-target="#datetimepicker2"
+                                        data-toggle="datetimepicker"
+                                >
+                                    <div class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">
+                            검색
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Brand Buttons -->
+</div>
+</body>
+</html>
