@@ -14,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.StringUtils.hasText;
@@ -37,8 +39,8 @@ public class CompanyCarController {
 
     //차량 조회
     @GetMapping
-    public PagingCompanyCarDto getCompanyCar(Pageable pageable) {
-        return getPagingCompanyCarDto(pageable);
+    public Object getCompanyCar(Pageable pageable) {
+        return getAllCompanyCarEntity(companyCarRepository.findAllEntity());
     }
 
     //차량 정보 수정
@@ -65,10 +67,20 @@ public class CompanyCarController {
 
     //차량 정보 삭제
     @DeleteMapping("/{companyIdList}")
-    public PagingCompanyCarDto deleteCompanyCarDto(@PathVariable("companyIdList")List<Long> companyIdList, Pageable pageable){
+    public Object deleteCompanyCarDto(@PathVariable("companyIdList")List<Long> companyIdList, Pageable pageable){
         companyCarRepository.findByIdIn(companyIdList)
                         .forEach(companyCar -> companyCarRepository.delete(companyCar));
-        return getPagingCompanyCarDto(pageable);
+        return getAllCompanyCarEntity(companyCarRepository.findAllEntity());
+    }
+
+    private Object getAllCompanyCarEntity(List<CompanyCar> allEntity2) {
+        final List<CompanyCar> allEntity = allEntity2;
+        final List<PagingCompanyCarDto.CompanyCarDto> collect = allEntity.stream()
+                .map(companyCar -> new PagingCompanyCarDto.CompanyCarDto(companyCar))
+                .collect(Collectors.toList());
+        final Map<String, List<PagingCompanyCarDto.CompanyCarDto>> stringListMap = new HashMap<>();
+        stringListMap.put("data", collect);
+        return stringListMap;
     }
 
     @PostMapping("/search/v1")
@@ -80,6 +92,12 @@ public class CompanyCarController {
                 .collect(Collectors.toList());
         return new PagingCompanyCarDto(companyCarDtoList, (int) companyCars.getTotalElements(), companyCars.getSize(), companyCars.getNumber(), companyCars.getTotalPages());
     }
+
+    @PostMapping("/search/v2")
+    public Object searchCompanyCarNotPaging(@RequestBody CompanyCarSearchDto companyCarSearchDto) {
+        return getAllCompanyCarEntity(companyCarRepository.searchV2EqualConditionNotPaging(companyCarSearchDto));
+    }
+
 
     private PagingCompanyCarDto getPagingCompanyCarDto(Pageable pageable) {
         final Page<CompanyCar> all = companyCarRepository.findAll(pageable);

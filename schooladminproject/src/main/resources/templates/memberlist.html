@@ -373,39 +373,39 @@
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">이메일</th>
-                    <th scope="col">주소</th>
-                    <th scope="col" >설명</th>
-                    <th scope="col">전화번호</th>
-                    <th scope="col">생성 날짜</th>
-                    <th scope="col">수정 날짜</th>
-                    <th scope="col">닉네임</th>
-                    <th scope="col">등록 차량 현황</th>
-                    <th scope="col">추천인</th>
-                    <th scope="col">회원 등급</th>
+                    <th>#</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>주소</th>
+                    <th >설명</th>
+                    <th>전화번호</th>
+                    <th>생성 날짜</th>
+                    <th>수정 날짜</th>
+                    <th>닉네임</th>
+                    <th>등록 차량 현황</th>
+                    <th>추천인</th>
+                    <th>회원 등급</th>
                 </tr>
                 </thead>
                 <tbody class="tbodyClass">
                 <tr th:each="memberInfo ,memberStat:${memberList}">
-                    <th scope="col">
+                    <th >
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input checkboxColumn"
                                    th:id="'customCheck'+${memberInfo.id}">
                             <label class="custom-control-label" th:for="'customCheck'+${memberInfo.id}">[[${memberInfo.id}]]</label>
                     </th>
-                    <th scope="col">[[${memberInfo.name}]]</th>
-                    <th scope="col">[[${memberInfo.email}]]</th>
-                    <th scope="col">[[${memberInfo.address}]]</th>
-                    <th scope="col">[[${memberInfo.description}]]</th>
-                    <th scope="col">[[${memberInfo.phoneNumber}]]</th>
-                    <th scope="col">[[${memberInfo.createdAt}]]</th>
-                    <th scope="col">[[${memberInfo.modifiedAt}]]</th>
-                    <th scope="col">[[${memberInfo.username}]]</th>
-                    <th scope="col">[[${#lists.size(memberInfo.businessUsedCars)}]]</th>
-                    <th scope="col">[[${memberInfo.recommendMember}]]</th>
-                    <th scope="col">[[${memberInfo.memberPremiumClass}]]</th>
+                    <th >[[${memberInfo.name}]]</th>
+                    <th >[[${memberInfo.email}]]</th>
+                    <th >[[${memberInfo.address}]]</th>
+                    <th >[[${memberInfo.description}]]</th>
+                    <th >[[${memberInfo.phoneNumber}]]</th>
+                    <th >[[${memberInfo.createdAt}]]</th>
+                    <th >[[${memberInfo.modifiedAt}]]</th>
+                    <th >[[${memberInfo.username}]]</th>
+                    <th >[[${#lists.size(memberInfo.businessUsedCars)}]]</th>
+                    <th >[[${memberInfo.recommendMember}]]</th>
+                    <th >[[${memberInfo.memberPremiumClass}]]</th>
                 </tr>
                 </tbody>
             </table>

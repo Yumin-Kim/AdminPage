@@ -13,6 +13,8 @@
     <title>SB Admin 2 - Buttons</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
     <link
             href="vendor/fontawesome-free/css/all.min.css"
             rel="stylesheet"
@@ -40,7 +42,6 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"
     />
-
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet"/>
     <style>
@@ -57,56 +58,34 @@
 
             <div class="container-fluid">
                 <h1 class="h3 mb-4 text-gray-800">
+                    매물 관리
                 </h1>
                 <div class="row">
-                   <div th:fragment="layout/membersearch :: fragment-member-search" ></div>
+                    <div th:replace="layout/companycarsearch.html :: fragment-companycar-search" ></div>
                 </div>
             </div>
             <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
-        <div class="card shadow mb-4 col-xl-12 table-responsive-xl">
-            <div class="card-header py-3"></div>
-            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">이메일</th>
-                    <th scope="col">주소</th>
-                    <th scope="col" >설명</th>
-                    <th scope="col">전화번호</th>
-                    <th scope="col">생성 날짜</th>
-                    <th scope="col">수정 날짜</th>
-                    <th scope="col">닉네임</th>
-                    <th scope="col">등록 차량 현황</th>
-                    <th scope="col">추천인</th>
-                    <th scope="col">회원 등급</th>
-                </tr>
-                </thead>
-                <tbody class="tbodyClass">
-                <tr th:each="memberInfo ,memberStat:${memberList}">
-                    <th scope="col">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input checkboxColumn"
-                                   th:id="'customCheck'+${memberInfo.id}">
-                            <label class="custom-control-label" th:for="'customCheck'+${memberInfo.id}">[[${memberInfo.id}]]</label>
-                    </th>
-                    <th scope="col">[[${memberInfo.name}]]</th>
-                    <th scope="col">[[${memberInfo.email}]]</th>
-                    <th scope="col">[[${memberInfo.address}]]</th>
-                    <th scope="col">[[${memberInfo.description}]]</th>
-                    <th scope="col">[[${memberInfo.phoneNumber}]]</th>
-                    <th scope="col">[[${memberInfo.createdAt}]]</th>
-                    <th scope="col">[[${memberInfo.modifiedAt}]]</th>
-                    <th scope="col">[[${memberInfo.username}]]</th>
-                    <th scope="col">[[${#lists.size(memberInfo.businessUsedCars)}]]</th>
-                    <th scope="col">[[${memberInfo.recommendMember}]]</th>
-                    <th scope="col">[[${memberInfo.memberPremiumClass}]]</th>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th><input type="checkbox"  name="select_all" value="1" id="example-select-all"></th>
+                <!-- <th>Id</th> -->
+                <th>모델 명</th>
+                <th>출고년도</th>
+                <th>주행 거리</th>
+                <th>가격</th>
+                <th>주 연료</th>
+                <th>색깔</th>
+                <th>변속기</th>
+                <th>승차인원</th>
+                <th>이미지 주소</th>
+                <th>관리자</th>
+                <th>차량 옵션</th>
+            </tr>
+            </thead>
+        </table>
+        <!--        </div>-->
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -115,13 +94,8 @@
                 </div>
             </div>
         </footer>
-        <!-- End of Footer -->
     </div>
-    <!-- End of Content Wrapper -->
 </div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
@@ -132,20 +106,163 @@
 <script src="js/sb-admin-2.min.js"></script>
 <script
         type="text/javascript"
-        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"
-></script>
-<script
-        type="text/javascript"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"
 ></script>
-<script type="text/javascript">
+<link
+        type="stylesheet"
+        href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></link>
+
+
+<script>
+function chk_ok_show(){
+		$('#checked_result2').empty()
+		var tmp1 = ''
+		$('#example tbody tr').each(function(k,v){
+			var tcalss = $(this).attr('class')
+			var tval = $(this).find("td").eq(1).html();
+			var this_row = example_tbl.rows(this).data();
+
+			tmp1 += (k+1)+'열 '
+			tmp1 += 'class:'+tcalss+', second val:'+tval+', third val:'+this_row[0][2]
+			tmp1 += '<br>'
+		});
+
+		$('#checked_result2').html(tmp1)
+
+	}
+$(document).ready(function () {
+    $("#formBox").on("submit",(e)=>{
+                var form_data = new FormData(document.getElementById("formBox"));
+                console.log("form data: ");
+                const sortingCondition = {}
+                for(var pair of form_data.entries())
+                {
+
+                    if(pair[1].trim() !== ""){
+                        if(pair[0] === "createdAt" || pair[0] === "lastCreatedAt"){
+                            const arrDate = pair[1].split("/");
+                            let dateYear = arrDate.splice(2,1);
+                            if(dateYear[0].length > 5){
+                                dateYear = dateYear.slice(0,4)
+                                console.log(dateYear);
+                            }
+                            arrDate.splice(0,0,dateYear[0])
+                            pair[1] = new Date(arrDate.join("-")).toISOString()
+                        }
+                        if(pair[1] === "on") pair[1] = true
+                        sortingCondition[pair[0]] = pair[1]
+                    }
+
+                }
+                if(Object.keys(sortingCondition).indexOf("isImageSrc") < 0 )
+                    sortingCondition["isImageSrc"] = false
+                console.log(sortingCondition);
+                e.preventDefault()
+               $('#example').dataTable().fnClearTable();
+               $.ajax({
+                             url: `http://localhost:8080/company/api/search/v2`,
+                             type: 'POST',
+                             data: JSON.stringify(sortingCondition),
+                             dataType: "json",
+                            contentType:"application/json;charset=UTF-8",
+                             success:function(data){
+                             console.log(data)
+                                              $('#example').dataTable().fnAddData(data["data"]);
+                             }
+                         })
+            });
+    $('#example').DataTable( {
+        'columnDefs': [{
+         'targets': 0,
+         'searchable': false,
+         'orderable': false,
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox" class="tableCheckBox" value="' + $('<div/>').text(data).html() + '">';
+         }
+      }],
+            "ajax": "http://localhost:8080/company/api",
+            "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "modelYear" },
+                { "data": "distance" },
+                { "data": "price" },
+                { "data": "fuel" },
+                { "data": "color" },
+                { "data": "carTransmissionKind" },
+                { "data": "passengers" },
+                { "data": "imageSrc" },
+                { "data": "registerAdminName" },
+                { "data": "modelOption" },
+            ]
+        } );
+       $('#example-select-all').on('click', function(){
+      // Get all rows with search applied
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+   });
+
+   // Handle click on checkbox to set state of "Select all" control
+   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+         var el = $('#example-select-all').get(0);
+         // If "Select all" control is checked and has 'indeterminate' property
+         if(el && el.checked && ('indeterminate' in el)){
+            // Set visual state of "Select all" control
+            // as 'indeterminate'
+            el.indeterminate = true;
+         }
+      }
+   });
+    $(document).on("click", '.tableCheckBox', function(event) {
+         console.log(event.target.value)
+        if (confirm("삭제 하시겠습니까?")) {
+          alert(`${event.target.value}행 삭제 되었습니다.`);
+         $.ajax({
+                 url: `http://localhost:8080/company/api/${event.target.value}`,
+                 type: 'DELETE',
+                 success:function(data){
+                 console.log(data)
+                   $('#example').dataTable().fnClearTable();
+                  $('#example').dataTable().fnAddData(data["data"]);
+                 }
+             })
+
+        }
+    });
+   // Handle form submission event
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+
+      // Iterate over all checkboxes in the table
+      table.$('input[type="checkbox"]').each(function(){
+         // If checkbox doesn't exist in DOM
+         if(!$.contains(document, this)){
+            // If checkbox is checked
+            if(this.checked){
+               // Create a hidden element
+               $(form).append(
+                  $('<input>')
+                     .attr('type', 'hidden')
+                     .attr('name', this.name)
+                     .val(this.value)
+               );
+            }
+         }
+      });
+   });
+});
+
+
 </script>
 <script
         type="text/javascript"
         src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"
 ></script>
-<link
-        type="stylesheet"
-        href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"></link>
+
+
 </body>
 </html>

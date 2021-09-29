@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.List;
+
 import static com.schoolproject.schooladminproject.domain.QAdmin.admin;
 import static com.schoolproject.schooladminproject.domain.QCompanyCar.companyCar;
 import static org.springframework.util.StringUtils.hasText;
@@ -39,6 +41,15 @@ public class CompanyCarSearchRepositoryImpl implements CompanyCarSearchRepositor
         return new PageImpl<>(companyCarQueryResults.getResults(), pageable, companyCarQueryResults.getTotal());
     }
 
+    @Override
+    public List<CompanyCar> searchV2EqualConditionNotPaging(CompanyCarSearchDto companyCarSearchDto) {
+        final List<CompanyCar> fetch = jpaQueryFactory.selectFrom(companyCar)
+                .join(companyCar.admin, admin).fetchJoin()
+                .where(searchCondV1(companyCarSearchDto))
+                .fetch();
+        return fetch;
+    }
+
     private BooleanBuilder searchCondV1(CompanyCarSearchDto companyCarSearchDto){
         final BooleanBuilder booleanBuilder = new BooleanBuilder();
 
@@ -60,14 +71,14 @@ public class CompanyCarSearchRepositoryImpl implements CompanyCarSearchRepositor
         if (companyCarSearchDto.getCreatedModelYear()!=null && companyCarSearchDto.getLastedModelYear()!=null) {
             booleanBuilder.and(companyCar.modelYear.between(companyCarSearchDto.getCreatedModelYear(),companyCarSearchDto.getLastedModelYear()));
         }
-        if (companyCarSearchDto.getCreatedModelYear() != null || companyCarSearchDto.getLastedModelYear() != null) {
-            if (companyCarSearchDto.getCreatedModelYear() !=null) {
-                booleanBuilder.and(companyCar.modelYear.goe(companyCarSearchDto.getCreatedModelYear()));
-            }
-            if (companyCarSearchDto.getLastedModelYear() != null) {
-                booleanBuilder.and(companyCar.modelYear.loe(companyCarSearchDto.getCreatedModelYear()));
-            }
-        }
+//        if (companyCarSearchDto.getCreatedModelYear() != null || companyCarSearchDto.getLastedModelYear() != null) {
+//            if (companyCarSearchDto.getCreatedModelYear() !=null) {
+//                booleanBuilder.and(companyCar.modelYear.goe(companyCarSearchDto.getCreatedModelYear()));
+//            }
+//            if (companyCarSearchDto.getLastedModelYear() != null) {
+//                booleanBuilder.and(companyCar.modelYear.loe(companyCarSearchDto.getCreatedModelYear()));
+//            }
+//        }
         if (companyCarSearchDto.getGreaterEqualDistance() != null) {
             booleanBuilder.and(companyCar.distance.eq(companyCarSearchDto.getGreaterEqualDistance()));
         }
@@ -80,25 +91,25 @@ public class CompanyCarSearchRepositoryImpl implements CompanyCarSearchRepositor
         if (companyCarSearchDto.getGreaterEqualPrice() != null && companyCarSearchDto.getLessEqualPrice() != null) {
             booleanBuilder.and(companyCar.price.between(companyCarSearchDto.getGreaterEqualPrice(), companyCarSearchDto.getLessEqualPrice()));
         }
-        if (companyCarSearchDto.getGreaterEqualPrice() != null || companyCarSearchDto.getLessEqualPrice() != null) {
-            if (companyCarSearchDto.getGreaterEqualPrice() != null) {
-                booleanBuilder.and(companyCar.price.goe(companyCarSearchDto.getGreaterEqualPrice()));
-            }
-            if (companyCarSearchDto.getLessEqualPrice() != null) {
-                booleanBuilder.and(companyCar.price.loe(companyCarSearchDto.getLessEqualPrice()));
-            }
-        }
+//        if (companyCarSearchDto.getGreaterEqualPrice() != null || companyCarSearchDto.getLessEqualPrice() != null) {
+//            if (companyCarSearchDto.getGreaterEqualPrice() != null) {
+//                booleanBuilder.and(companyCar.price.goe(companyCarSearchDto.getGreaterEqualPrice()));
+//            }
+//            if (companyCarSearchDto.getLessEqualPrice() != null) {
+//                booleanBuilder.and(companyCar.price.loe(companyCarSearchDto.getLessEqualPrice()));
+//            }
+//        }
         if (companyCarSearchDto.getCreatedAt() != null && companyCarSearchDto.getLastCreatedAt() != null) {
-            booleanBuilder.and(companyCar.createdAt.between(companyCarSearchDto.getCreatedAt(), companyCarSearchDto.getCreatedAt()));
+            booleanBuilder.and(companyCar.createdAt.between(companyCarSearchDto.getCreatedAt(), companyCarSearchDto.getLastCreatedAt()));
         }
-        if (companyCarSearchDto.getCreatedAt() != null || companyCarSearchDto.getLastCreatedAt() != null) {
-            if (companyCarSearchDto.getCreatedAt() != null) {
-                booleanBuilder.and(companyCar.createdAt.goe(companyCarSearchDto.getCreatedAt()));
-            }
-            if (companyCarSearchDto.getLastCreatedAt() != null) {
-                booleanBuilder.and(companyCar.createdAt.loe(companyCarSearchDto.getLastCreatedAt()));
-            }
-        }
+//        if (companyCarSearchDto.getCreatedAt() != null || companyCarSearchDto.getLastCreatedAt() != null) {
+//            if (companyCarSearchDto.getCreatedAt() != null) {
+//                booleanBuilder.and(companyCar.createdAt.goe(companyCarSearchDto.getCreatedAt()));
+//            }
+//            if (companyCarSearchDto.getLastCreatedAt() != null) {
+//                booleanBuilder.and(companyCar.createdAt.loe(companyCarSearchDto.getLastCreatedAt()));
+//            }
+//        }
         if (companyCarSearchDto.getIsImageSrc()) {
             booleanBuilder.and(companyCar.imageSrc.isNotNull());
         }

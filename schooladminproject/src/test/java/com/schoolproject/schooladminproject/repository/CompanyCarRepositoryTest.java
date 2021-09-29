@@ -38,6 +38,16 @@ class CompanyCarRepositoryTest {
 
     @Test
     @DisplayName("")
+    void CompanyCarRepositoryTest_1() throws Exception{
+        // given
+        companyCarRepository.findAllEntity();
+        // when
+
+        // then
+    }
+
+    @Test
+    @DisplayName("")
     void CompanyCarRepositoryTest() throws Exception {
         // given
         final CompanyCarSearchDto companyCarSearchDto = new CompanyCarSearchDto();
