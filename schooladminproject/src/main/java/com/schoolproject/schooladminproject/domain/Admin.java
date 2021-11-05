@@ -10,15 +10,16 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class Admin extends BaseCommonEntity {
     @Id
     @GeneratedValue
     @Column(name = "admin_id")
     private Long id;
-
+    private String name;
     @OneToMany(mappedBy = "admin")
     private List<CompanyCar> companyCars = new ArrayList<>();
 
-
+    protected Admin(String password) {
+        super(password);
+    }
 }

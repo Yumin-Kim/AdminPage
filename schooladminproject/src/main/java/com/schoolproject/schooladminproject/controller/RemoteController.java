@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RemoteController {
-    @GetMapping
-    public String getRemote(){
-        return "index";
-    }
+
     @GetMapping("/company")
     public String getCompany(){
         return "companycarlist";

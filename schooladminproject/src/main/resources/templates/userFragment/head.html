@@ -1,0 +1,26 @@
+<!--해당 hyml은 중복 되는 css를 제거하기 위해 존재하는 Fragment 입니다. -->
+<html lang="ko" xmls:th="http://www.thymeleaf.org" >
+<th:block th:fragment="headerFragment">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" type="image/x-icon" href="userPage/images/favicon.ico" />
+
+        <!-- bootstrap.min css -->
+        <link rel="stylesheet" th:href="@{/userPage/plugins/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/userPage/plugins/bootstrap/css/bootstrap.min.css}" />
+        <!-- Icon Font Css -->
+        <link rel="stylesheet" th:href="@{/userPage/plugins/icofont/icofont.min.css}" />
+        <!-- Slick Slider  CSS -->
+        <link rel="stylesheet" th:href="@{/userPage/plugins/slick-carousel/slick/slick.css}" />
+        <link
+                rel="stylesheet"
+                th:href="@{/userPage/plugins/slick-carousel/slick/slick-theme.css}"
+        />
+
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" th:href="@{/userPage/css/style.css}" />
+    </head>
+</th:block>
+
+
+</html>

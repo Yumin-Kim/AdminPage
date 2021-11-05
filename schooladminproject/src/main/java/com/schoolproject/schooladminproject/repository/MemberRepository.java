@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.plaf.metal.MetalMenuBarUI;
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> , MemberSea
 
     @EntityGraph(attributePaths = {"businessUsedCar"})
     Optional<Member> findJoinBusinessCarById(Long MemberId);
+
 
     @Override
     @EntityGraph(attributePaths = {"businessUsedCar"})
@@ -30,4 +32,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> , MemberSea
 
     List<Member> findByIdIn(List<Long> memberIdLists);
 
+    Optional<Member> findByEmail(String s);
+
+    Optional<Member> findByName(String s);
 }

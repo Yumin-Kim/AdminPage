@@ -1,6 +1,5 @@
 package com.schoolproject.schooladminproject.dto;
 
-import com.schoolproject.schooladminproject.controller.MemberController;
 import com.schoolproject.schooladminproject.domain.Member;
 import com.schoolproject.schooladminproject.domain.enumtype.MemberPremiumClass;
 import lombok.AllArgsConstructor;

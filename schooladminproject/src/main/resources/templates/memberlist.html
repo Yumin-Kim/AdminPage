@@ -499,7 +499,7 @@
                   if (confirm("삭제 하시겠습니까?")) {
                           alert(`${column} 삭제 되었습니다.`);
                           $.ajax({
-                             url: `http://localhost:8080/member/${column}`,
+                             url: `http://media.seowon.ac.kr:5050/member/${column}`,
                              type: 'DELETE',
                              data: "json",
                              success:function(data){
@@ -562,7 +562,7 @@
                     if(Object.keys(sortingCondition).indexOf("isDescription") < 0)
                         sortingCondition["isDescription"] = false
                     $.ajax({
-                             url: `http://localhost:8080/member/search/v1`,
+                             url: `http://media.seowon.ac.kr:5050/member/search/v1`,
                              type: 'POST',
                              data: JSON.stringify(sortingCondition),
                              dataType: "json",

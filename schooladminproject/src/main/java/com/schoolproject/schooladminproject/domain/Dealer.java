@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
 public class Dealer extends BaseCommonEntity {
     @Id
     @GeneratedValue
@@ -24,5 +23,9 @@ public class Dealer extends BaseCommonEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dealer_company_id")
     private DealerCompany dealerCompany;
+
+    public Dealer(String password) {
+        super(password);
+    }
 
 }

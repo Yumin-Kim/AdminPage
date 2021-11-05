@@ -160,7 +160,7 @@ $(document).ready(function () {
                 e.preventDefault()
                $('#example').dataTable().fnClearTable();
                $.ajax({
-                             url: `http://localhost:8080/company/api/search/v2`,
+                             url: `http://media.seowon.ac.kr:5050/company/api/search/v2`,
                              type: 'POST',
                              data: JSON.stringify(sortingCondition),
                              dataType: "json",
@@ -181,7 +181,7 @@ $(document).ready(function () {
              return '<input type="checkbox" class="tableCheckBox" value="' + $('<div/>').text(data).html() + '">';
          }
       }],
-            "ajax": "http://localhost:8080/company/api",
+            "ajax": "http://media.seowon.ac.kr:5050/company/api",
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
@@ -222,7 +222,7 @@ $(document).ready(function () {
         if (confirm("삭제 하시겠습니까?")) {
           alert(`${event.target.value}행 삭제 되었습니다.`);
          $.ajax({
-                 url: `http://localhost:8080/company/api/${event.target.value}`,
+                 url: `http://media.seowon.ac.kr:5050/company/api/${event.target.value}`,
                  type: 'DELETE',
                  success:function(data){
                  console.log(data)

@@ -1,0 +1,93 @@
+<html xmls:th="http://www.thymeleaf.org" >
+<th:block th:fragment="navigationFragment">
+    <nav class="navbar navbar-expand-lg navigation" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img
+                        src="userpage/images/logo.png"
+                        alt=""
+                        class="img-fluid"
+                />
+            </a>
+
+            <button
+                    class="navbar-toggler collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarmain"
+                    aria-controls="navbarmain"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="icofont-navigation-menu"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarmain">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">차량 등록</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carinfo">등록 차량 조회</a>
+                    </li>
+                    <li th:if = "${member != null}" class="nav-item">
+                        <a class="nav-link" href="/usercar">[[${member.name}]]의 등록 차량 조회</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                id="dropdown02"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >팔때<i class="icofont-thin-down"></i
+                        ></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                            <li>
+                                <a class="dropdown-item">팔아줘</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">직거래 </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">바꿔줘</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="department.html"
+                                id="dropdown02"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >살때<i class="icofont-thin-down"></i
+                        ></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                            <li>
+                                <a class="dropdown-item">나와라</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">구해줘 </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item">테마 PICK</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</th:block>
+</html>

@@ -58,7 +58,7 @@ public class PagingCompanyCarDto {
             carTransmissionKind = companyCar.getCarTransmissionKind();
             modelOption = companyCar.getModelOption();
             imageSrc = companyCar.getImageSrc();
-            registerAdminName = companyCar.getAdmin().getName();
+//            registerAdminName = companyCar.getAdmin().getName();
         }
     }
 }
