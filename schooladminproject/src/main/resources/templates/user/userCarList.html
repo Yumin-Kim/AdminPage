@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>KB 차차차 회원 등록 차량 조회</title>
     <th:block th:replace="userFragment/head :: headerFragment"></th:block>
@@ -19,7 +19,7 @@
             <div class="block text-center">
               <span class="text-white">Our services</span>
               <h1 class="text-capitalize mb-5 text-lg">
-                {}고객님의 등록 차량 조회
+                [[${member}]]고객님의 등록 차량 조회
               </h1>
 
               <!-- <ul class="list-inline breadcumb-nav">
@@ -36,101 +36,100 @@
     <section class="section service-2">
       <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6">
+          <div th:each=" car :${carInfo}" class="col-lg-4 col-md-6 col-sm-6">
             <div class="service-block mb-5">
               <img
-                src="images/service/service-1.jpg"
+                th:src="${car.imageSrc}"
                 alt=""
                 class="img-fluid"
               />
               <div class="content">
-                <h4 class="mt-4 mb-2 title-color">Child care</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
+                <h4 class="mt-4 mb-2 title-color">[[${car.name}]]</h4>
+                <p class="mb-4">차 종류 : [[${car.carKind}]]</p>
+                <p class="mb-4">차 색상 : [[${car.carColors}]]</p>
+                <p class="mb-4">주 연료 : [[${car.fuel}]]</p>
+                <p class="mb-4">변속기 종류 : [[${car.carTransmissionKind}]]</p>
+                <p class="mb-4">년식 : [[${car.modelYear}]]</p>
+                <p class="mb-4">차 설명 : [[${car.description}]]</p>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="service-block mb-5">
-              <img
-                src="images/service/service-2.jpg"
-                alt=""
-                class="img-fluid"
-              />
-              <div class="content">
-                <h4 class="mt-4 mb-2 title-color">Personal Care</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--            <div class="service-block mb-5">-->
 
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="service-block mb-5">
-              <img
-                src="images/service/service-3.jpg"
-                alt=""
-                class="img-fluid"
-              />
-              <div class="content">
-                <h4 class="mt-4 mb-2 title-color">CT scan</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
-              </div>
-            </div>
-          </div>
+<!--              <div class="content">-->
+<!--                <h4 class="mt-4 mb-2 title-color">Personal Care</h4>-->
+<!--                <p class="mb-4">-->
+<!--                  Saepe nulla praesentium eaque omnis perferendis a doloremque.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="service-block mb-5 mb-lg-0">
-              <img
-                src="images/service/service-4.jpg"
-                alt=""
-                class="img-fluid"
-              />
-              <div class="content">
-                <h4 class="mt-4 mb-2 title-color">Joint replacement</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--            <div class="service-block mb-5">-->
+<!--              <img-->
+<!--                src="images/service/service-3.jpg"-->
+<!--                alt=""-->
+<!--                class="img-fluid"-->
+<!--              />-->
+<!--              <div class="content">-->
+<!--                <h4 class="mt-4 mb-2 title-color">CT scan</h4>-->
+<!--                <p class="mb-4">-->
+<!--                  Saepe nulla praesentium eaque omnis perferendis a doloremque.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="service-block mb-5 mb-lg-0">
-              <img
-                src="images/service/service-6.jpg"
-                alt=""
-                class="img-fluid"
-              />
-              <div class="content">
-                <h4 class="mt-4 mb-2 title-color">Examination & Diagnosis</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--            <div class="service-block mb-5 mb-lg-0">-->
+<!--              <img-->
+<!--                src="images/service/service-4.jpg"-->
+<!--                alt=""-->
+<!--                class="img-fluid"-->
+<!--              />-->
+<!--              <div class="content">-->
+<!--                <h4 class="mt-4 mb-2 title-color">Joint replacement</h4>-->
+<!--                <p class="mb-4">-->
+<!--                  Saepe nulla praesentium eaque omnis perferendis a doloremque.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="service-block mb-5 mb-lg-0">
-              <img
-                src="images/service/service-8.jpg"
-                alt=""
-                class="img-fluid"
-              />
-              <div class="content">
-                <h4 class="mt-4 mb-2 title-color">Alzheimer's disease</h4>
-                <p class="mb-4">
-                  Saepe nulla praesentium eaque omnis perferendis a doloremque.
-                </p>
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--            <div class="service-block mb-5 mb-lg-0">-->
+<!--              <img-->
+<!--                src="images/service/service-6.jpg"-->
+<!--                alt=""-->
+<!--                class="img-fluid"-->
+<!--              />-->
+<!--              <div class="content">-->
+<!--                <h4 class="mt-4 mb-2 title-color">Examination & Diagnosis</h4>-->
+<!--                <p class="mb-4">-->
+<!--                  Saepe nulla praesentium eaque omnis perferendis a doloremque.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--            <div class="service-block mb-5 mb-lg-0">-->
+<!--              <img-->
+<!--                src="images/service/service-8.jpg"-->
+<!--                alt=""-->
+<!--                class="img-fluid"-->
+<!--              />-->
+<!--              <div class="content">-->
+<!--                <h4 class="mt-4 mb-2 title-color">Alzheimer's disease</h4>-->
+<!--                <p class="mb-4">-->
+<!--                  Saepe nulla praesentium eaque omnis perferendis a doloremque.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
     </section>
@@ -141,11 +140,12 @@
             <div class="cta-content">
               <div class="divider mb-4"></div>
               <h2 class="mb-5 text-lg">
-                We are pleased to offer you the
-                <span class="title-color">chance to have the healthy</span>
+                2분이면 끝!<br>
+                간단한 정보입력으로<br>
+                <span class="title-color">내 차의 최고가에 도전하세요!</span>
               </h2>
               <a href="appoinment.html" class="btn btn-main-2 btn-round-full"
-                >Get appoinment<i class="icofont-simple-right ml-2"></i
+                >KB차차차<i class="icofont-simple-right ml-2"></i
               ></a>
             </div>
           </div>

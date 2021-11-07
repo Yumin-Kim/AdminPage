@@ -16,20 +16,19 @@ import static org.springframework.util.StringUtils.hasText;
 @Entity
 @Getter
 @Setter(AccessLevel.PACKAGE)
-public class Member extends BaseCommonEntity implements UserDetails {
-
+public class Member extends BaseCommonEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
     @Column(unique = true)
     private String name;
     @Enumerated(EnumType.STRING)
     private MemberPremiumClass memberPremiumClass;
-
+    private String username;
     private String recommendMember;
-
     private Integer point;
+    @Column(unique = true)
     private String email;
 
     @Column(name = "auth")
@@ -38,8 +37,12 @@ public class Member extends BaseCommonEntity implements UserDetails {
     @OneToMany(mappedBy = "member")
     private List<BusinessUsedCar> businessUsedCar = new ArrayList<>();
 
+    protected Member() {
+        super(null);
+    }
+
     @Builder
-    protected Member(String name, String password, String email,String auth) {
+    protected Member(String name, String password, String email, String auth) {
         super(password);
         this.auth = auth;
         this.name = name;
@@ -47,7 +50,7 @@ public class Member extends BaseCommonEntity implements UserDetails {
     }
 
     public static Member createEntity(String loginName, String loginPassword, String email, String auth) {
-        return new Member(loginName, loginPassword, email , auth);
+        return new Member(loginName, loginPassword, email, auth);
     }
 
 
@@ -76,43 +79,5 @@ public class Member extends BaseCommonEntity implements UserDetails {
         if (memberDto.getMemberPremiumClass() != null) {
             setMemberPremiumClass(memberDto.getMemberPremiumClass());
         }
-    }
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        final Set<GrantedAuthority> roles = new HashSet<>();
-        for (String role : auth.split(",")){
-            roles.add(new SimpleGrantedAuthority(role));
-        }
-        return roles;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    // 계정 만료
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    // 계정 잠금 여부 반환
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    // 꼦벙 사용 가능 여부 반환
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }

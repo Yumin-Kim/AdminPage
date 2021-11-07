@@ -21,7 +21,6 @@ public interface MemberRepository extends JpaRepository<Member,Long> , MemberSea
     @EntityGraph(attributePaths = {"businessUsedCar"})
     Optional<Member> findJoinBusinessCarById(Long MemberId);
 
-
     @Override
     @EntityGraph(attributePaths = {"businessUsedCar"})
     Page<Member> findAll(Pageable pageable);
@@ -35,4 +34,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> , MemberSea
     Optional<Member> findByEmail(String s);
 
     Optional<Member> findByName(String s);
+
+    @Query("select m from Member m join fetch m.businessUsedCar b where m.id = :memberId")
+    Member findJoinBusinessCar(@Param("memberId") Long id);
 }

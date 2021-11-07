@@ -1,9 +1,17 @@
+file:
+  dir: /home/oem/WebDir/2021studentImages/
+
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/schooladmin?useUnicode=true&characterEncoding=utf8
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
   jpa:
     database: mysql

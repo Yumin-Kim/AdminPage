@@ -26,7 +26,8 @@ public class CarInfo extends BaseDateEntity {
     private String color;
     @Enumerated(EnumType.STRING)
     private CarTransmissionKind carTransmissionKind;
-    @Column(columnDefinition = "LONGTEXT")
+    @Enumerated(EnumType.STRING)
+    private CarKind carKind;
     private String modelOption;
     private Integer passengers;
     @Column(columnDefinition = "LONGTEXT")

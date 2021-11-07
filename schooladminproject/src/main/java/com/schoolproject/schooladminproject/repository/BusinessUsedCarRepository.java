@@ -14,4 +14,6 @@ public interface BusinessUsedCarRepository extends JpaRepository<BusinessUsedCar
     @Query("select b from BusinessUsedCar b left join  b.member m  where m.id in  :memberIdList")
     List<BusinessUsedCar> findContainMemberByIdIn(@Param("memberIdList") List<Long> memberIdList);
 
+    @Query("select b from BusinessUsedCar b join fetch  b.member m where m.id = :memberId")
+    List<BusinessUsedCar> findJoinMember(@Param("memberId") Long id);
 }

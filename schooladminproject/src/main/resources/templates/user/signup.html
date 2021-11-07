@@ -31,80 +31,76 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12">
-<!--                <form class="comment-form my-5" action="/signup" th:object="${user}" method="post" id="comment-form">-->
-<!--                  <h4 class="mb-4">회원 가입</h4>-->
-<!--                  <div class="row">-->
-<!--                    <div class="col-md-12">-->
-<!--                      <div class="form-group">-->
-<!--                        <label for="name">이름</label>-->
-<!--                        <input-->
-<!--                          class="form-control"-->
-<!--                          type="text"-->
-<!--                          th:field="*{name}"-->
-<!--                          placeholder="Name:"-->
-<!--                        />-->
-<!--                      </div>-->
-<!--                    </div>-->
+                <form class="comment-form my-5" action="/signup" th:object="${user}" method="post" id="comment-form">
+                  <h4 class="mb-4">회원 가입</h4>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="name">이름</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          th:field="*{name}"
+                          placeholder="Name:"
+                        />
+                      </div>
+                    </div>
 
-<!--                    <div class="col-md-12">-->
-<!--                      <div class="form-group">-->
-<!--                        <label for="email">이메일</label>-->
-<!--                        <input-->
-<!--                                class="form-control"-->
-<!--                                type="email"-->
-<!--                                th:field="*{email}"-->
-<!--                                placeholder="email:"-->
-<!--                        />-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12">-->
-<!--                      <div class="form-group">-->
-<!--                        <label for="password">비밀 번호 </label>-->
-<!--                        <input-->
-<!--                          class="form-control"-->
-<!--                          type="password"-->
-<!--                          th:field="*{password}"-->
-<!--                          placeholder="password:"-->
-<!--                        />-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="col-md-12">-->
-<!--                    <div class="form-check col-sm-6">-->
-<!--                      <div class="form-check form-check-inline">-->
-<!--                        <input type="radio"-->
-<!--                               class="form-check-input"-->
-<!--                               checked="checked"-->
-<!--                               th:field="*{auth}"-->
-<!--                               value="ROLE_USER"/>-->
-<!--                        <label>회원</label>-->
-<!--                      </div>-->
-<!--                      <div class="form-check form-check-inline">-->
-<!--                        <input-->
-<!--                                type="radio"-->
-<!--                                class="form-check-input"-->
-<!--                                value="ROLE_USER,ROLE_ADMIN"-->
-<!--                                th:field="*{auth}"-->
-<!--                                checked="checked"-->
-<!--                        />-->
-<!--                        <label>어드민</label>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="email">이메일</label>
+                        <input
+                                class="form-control"
+                                type="email"
+                                th:field="*{email}"
+                                placeholder="email:"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="password">비밀 번호 </label>
+                        <input
+                          class="form-control"
+                          type="password"
+                          th:field="*{password}"
+                          placeholder="password:"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-check col-sm-6">
+                      <div class="form-check form-check-inline">
+                        <input type="radio"
+                               class="form-check-input"
+                               checked="checked"
+                               th:field="*{auth}"
+                               value="USER"/>
+                        <label>회원</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                                type="radio"
+                                class="form-check-input"
+                                value="ADMIN"
+                                th:field="*{auth}"
+                                checked="checked"
+                        />
+                        <label>어드민</label>
+                      </div>
+                    </div>
+                  </div>
 
-<!--                  <input-->
-<!--                    class="btn btn-main-2 btn-round-full"-->
-<!--                    type="submit"-->
-<!--                    name="submit-contact"-->
-<!--                    id="submit_contact"-->
-<!--                    value="회원 가입"-->
-<!--                  />-->
-<!--                </form>-->
-                <form action="/signup" method="post">
-                  <input type="text" name="name">
-                  <input type="text" name="password">
-                  <input type="submit" value="submit">
+                  <input
+                    class="btn btn-main-2 btn-round-full"
+                    type="submit"
+                    name="submit-contact"
+                    id="submit_contact"
+                    value="회원 가입"
+                  />
                 </form>
+
               </div>
             </div>
           </div>

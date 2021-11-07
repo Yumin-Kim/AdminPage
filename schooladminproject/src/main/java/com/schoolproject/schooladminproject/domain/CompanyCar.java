@@ -15,7 +15,6 @@ import static org.springframework.util.StringUtils.hasText;
 // 차차차 보유 차량
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "company_car")
 public class CompanyCar extends CarInfo {
     @Id
@@ -29,7 +28,6 @@ public class CompanyCar extends CarInfo {
     private Admin admin;
 
     protected CompanyCar(Integer modelYear, Integer distance, Integer price, CarFuelType fuel, String name, String color, CarTransmissionKind carTransmissionKind, String modelOption, Integer passengers, String imageSrc,Admin admin) {
-        super(modelYear, distance, price, fuel, name, color, carTransmissionKind, modelOption, passengers, imageSrc);
         this.admin = admin;
     }
 

@@ -3,6 +3,7 @@ package com.schoolproject.schooladminproject.service.user;
 import com.schoolproject.schooladminproject.domain.Member;
 import com.schoolproject.schooladminproject.domain.SiteUser;
 import com.schoolproject.schooladminproject.dto.SiteUserRes;
+import com.schoolproject.schooladminproject.dto.user.LoginInfo;
 import com.schoolproject.schooladminproject.dto.user.UserDto;
 import com.schoolproject.schooladminproject.repository.MemberRepository;
 import com.schoolproject.schooladminproject.repository.SiteUserRepository;
@@ -27,18 +28,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public Long save(UserDto userDto) {
-        log.info("save {}" , userDto.toString());
-        final SiteUser entity = SiteUser.createEntity(userDto.getName(), passwordEncoder.encode(userDto.getPassword()), userDto.getAuth());
-
-        return siteUserRepository.save(entity).getId();
+        final Member entity = Member.createEntity(userDto.getName(), passwordEncoder.encode(userDto.getPassword()), userDto.getEmail(), userDto.getAuth());
+        return memberRepository.save(entity).getId();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        final SiteUser findUser = siteUserRepository.findByName(name);
-        if (findUser == null) {
-            throw new UsernameNotFoundException(name);
-        }
-        return new SiteUserRes(findUser);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        final Member findMember = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+        return new LoginInfo(findMember);
     }
 }

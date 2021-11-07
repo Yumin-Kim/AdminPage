@@ -1,5 +1,10 @@
 server:
   port: 4040
+
+
+file:
+  dir: /home/oem/WebDir/2021studentImages/
+
 spring:
   devtools:
     livereload:
@@ -13,7 +18,7 @@ spring:
   jpa:
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       show-sql: true
       default_batch_fetch_size: 500
     properties:

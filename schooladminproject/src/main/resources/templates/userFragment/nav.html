@@ -1,10 +1,10 @@
-<html xmls:th="http://www.thymeleaf.org" >
+<html xmls:th="http://www.thymeleaf.org">
 <th:block th:fragment="navigationFragment">
     <nav class="navbar navbar-expand-lg navigation" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img
-                        src="userpage/images/logo.png"
+                        th:src="@{/userPage/images/logo.png}"
                         alt=""
                         class="img-fluid"
                 />
@@ -27,15 +27,19 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${ROLE == null}" >
                         <a class="nav-link" href="/register">차량 등록</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/carinfo">등록 차량 조회</a>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="/carinfo">등록 차량 조회</a>-->
+<!--                    </li>-->
+                    <li th:if="${ROLE == null}" class="nav-item">
+                        <a class="nav-link" th:if="${member != null}" href="/usercar">[[${member}]]의 등록 차량 조회</a>
                     </li>
-                    <li th:if = "${member != null}" class="nav-item">
-                        <a class="nav-link" href="/usercar">[[${member.name}]]의 등록 차량 조회</a>
+
+                    <li th:if="${ROLE != null}" class="nav-item">
+                        <a class="nav-link" href="http://media.seowon.ac.kr:5050">관리자 사이트</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -62,7 +66,6 @@
                     <li class="nav-item dropdown">
                         <a
                                 class="nav-link dropdown-toggle"
-                                href="department.html"
                                 id="dropdown02"
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
@@ -82,8 +85,14 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">로그인</a>
+                    <li th:if="${ROLE == null}" class="nav-item">
+                    <a th:if="${member != null}" class="nav-link" href="/logout">로그아웃</a>
+                    <a th:unless="${member != null}" class="nav-link" href="/login">로그인</a>
+                    </li>
+
+                    <li th:if="${ROLE != null}" class="nav-item">
+                    <a th:if="${ROLE != null}" class="nav-link" href="/logout">로그아웃</a>
+                    <a th:unless="${ROLE != null}" class="nav-link" href="/login">로그인</a>
                     </li>
                 </ul>
             </div>
